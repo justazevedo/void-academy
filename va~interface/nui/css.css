@@ -1,0 +1,151 @@
+body {
+    margin: auto;
+    padding: auto;
+    overflow: hidden;
+    background: transparent !important;
+}
+
+.container {
+    right: 30px;
+	bottom: 30px;
+	position: absolute !important;
+	z-index: 999 !important;
+    transition: 0.3s;
+}
+
+/*infos*/
+
+.ammo {
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.money {
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+/*Health*/
+
+.health {
+    display: block;
+    width: 150px;
+    height: 20px;
+    transform: skew(-8deg);
+    border-radius: 3px;
+    margin-left: 2%;
+    border: solid 1px rgb(6, 187, 0);
+    background-color: rgba(6, 187, 0, 0);
+}
+
+.healthBox {
+    background-color: rgba(6, 187, 0, 0.753);
+    position: relative;
+    transition: 0.3s;
+	width: 100%;
+	height: 100%;
+    border-radius: 3px;
+}
+
+.healthImg {
+    padding-left: 2%;
+    bottom: 1%;
+    transition: 0.3s;
+    transform: skew(0deg);
+}
+
+/*Armor*/
+
+.armor {
+    display: block;
+    width: 150px;
+    height: 20px;
+    transition: 0.3s;
+    transform: skew(-8deg);
+    border-radius: 3px;
+    margin-top: 1%;
+    border: solid 1px rgb(0, 155, 245);
+    background-color: rgba(0, 78, 245, 0);
+}
+
+.armorBox {
+    background-color: rgba(0, 155, 245, 0.753);
+    position: relative;
+    transition: 0.3s;
+	width: 100%;
+	height: 100%;
+    border-radius: 3px;
+}
+
+.armorImg {
+    padding-left: 2.5%;
+    bottom: 10%;
+    transform: skew(0deg);
+}
+
+/*Img*/
+
+.logo {
+    position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 100px;
+    padding-top: 2%;
+    padding-right: 2%;
+    transition: 0.3s;
+	z-index: 999 !important;
+    animation: logo 1.5s infinite linear;
+}
+
+
+.death {
+    display: none;
+    padding-left: 2%;
+    bottom: 1%;
+    transition: 0.3s;
+    transform: skew(0deg);
+}
+
+img {
+    z-index: 998 !important;
+    position: absolute;
+    color: white;
+    transform: skew(-0deg);
+}
+
+/*Extras Class*/
+
+.healthLow {
+    animation: hLow 1s linear infinite;
+}
+
+/*Keyframes*/
+
+@keyframes hLow {
+    0% {
+        opacity: 0;
+    } 50% {
+        opacity: 1;
+    } 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes logo {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(5px); }
+    40% { transform: translateY(8px); }
+    50% { transform: translateY(10px); }
+    60% { transform: translateY(8px); }
+    80% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+}

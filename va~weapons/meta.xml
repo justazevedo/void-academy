@@ -1,0 +1,96 @@
+<meta>
+    <info author="azarado" name="Weapons Models and Textures" version="1.0.0"/>
+
+    <file src="fx/tex_replace.fx"/>
+
+    <script src="shared/general.lua" type="shared"/>
+
+    <script src="client/main.lua" type="client"/>
+    <script src="client/models.lua" type="client"/>
+    
+    <script src="server/main.lua" type="server"/>
+
+    <file src="skins/ak_flamengo.jpg"/>
+    <file src="skins/awp_flamengo.jpg"/>
+    <file src="skins/m16_flamengo.jpg"/>
+
+    <file src="skins/ak_gold.jpg"/>
+    <file src="skins/awp_gold.jpg"/>
+    <file src="skins/m16_gold.jpg"/>
+
+    <file src="skins/ak_imperador.jpg"/>
+    <file src="skins/awp_imperador.jpg"/>
+    <file src="skins/m16_imperador.jpg"/>
+
+    <file src="skins/ak_natal.jpg"/>
+    <file src="skins/awp_natal.jpg"/>
+    <file src="skins/m16_natal.jpg"/>
+
+    <file src="skins/ak_neonrider.jpg"/>
+    <file src="skins/awp_neonrider.jpg"/>
+    <file src="skins/m16_neonrider.jpg"/>
+
+    <file src="skins/five_akatsuki.jpg"/>
+    <file src="skins/five_alerkina.jpg"/>
+    <file src="skins/five_banana.jpg"/>
+    <file src="skins/five_bobesponja.jpg"/>
+    <file src="skins/five_coringa.jpg"/>
+    <file src="skins/five_flamengo.jpg"/>
+    <file src="skins/five_glitch.jpg"/>
+    <file src="skins/five_gold.jpg"/>
+    <file src="skins/five_macaco.jpg"/>
+    <file src="skins/five_rainbow.jpg"/>
+    <file src="skins/five_reddrango.jpg"/>
+    <file src="skins/five_rickandmorty.jpg"/>
+    <file src="skins/five_rosa.jpg"/>
+    <file src="skins/five_roxa.jpg"/>
+    <file src="skins/five_trovao.jpg"/>
+
+    <export function="setTexture" type="server"/>
+    <export function="getWeaponWeaponShaderName" type="shared"/>
+    <export function="isStickerValid" type="shared" />
+
+    <!-- models -->
+    <file src="models/ak47.txd" />
+    <file src="models/ak47.dff" />      
+	<file src="models/axe.txd" />
+	<file src="models/axe2.txd" />
+    <file src="models/axe.dff" />     
+	<file src="models/aso.txd" />
+    <file src="models/aso.dff" />    
+	<file src="models/pick.txd" />
+    <file src="models/pick.dff" />	
+	<file src="models/pick2.txd" />
+    <file src="models/pick2.dff" />
+    <file src="models/colt45.txd" />
+    <file src="models/colt45.dff" />
+    <file src="models/desert_eagle.txd" />
+    <file src="models/desert_eagle.dff" />
+    <file src="models/grenade.txd" />
+    <file src="models/grenade.dff" />
+    <file src="models/katana.txd" />
+    <file src="models/katana.dff" />
+    <file src="models/knifecur.txd" />
+    <file src="models/knifecur.dff" />
+    <file src="models/m4.txd" />
+    <file src="models/m4.dff" />
+    <file src="models/micro_uzi.txd" />
+    <file src="models/micro_uzi.dff" />
+    <file src="models/sniper.txd" />
+    <file src="models/sniper.dff" />
+    <file src="models/shotgspa.txd" />
+    <file src="models/shotgspa.dff" />
+    <file src="models/chromegun.txd" />
+    <file src="models/chromegun.dff" />
+    <file src="models/mp5lng.txd" />
+    <file src="models/mp5lng.dff" />
+    <file src="models/tec9.txd" />
+    <file src="models/tec9.dff" />
+    <file src="models/silenced.txd" />
+    <file src="models/silenced.dff" />
+	<file src="models/fire_ex.txd" />
+    <file src="models/fire_ex.dff" />
+	<file src="models/rifle.txd" />
+    <file src="models/rifle.dff" />
+
+</meta>

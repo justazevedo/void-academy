@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css.css">
+        <script src="jquery-1.11.3.min.js"></script>
+        <script src="scripts.js"></script>
+        <title>Radio System (RS)</title>
+    </head>
+    <body>
+        <div class="radio">
+            <input type="text" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="frequency" class="frequency" placeholder="000">
+            <button id="join" onclick="submitFrequency()" class="join">Entrar</button>
+        </div>
+    </body>
+</html>

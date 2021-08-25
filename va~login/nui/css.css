@@ -1,0 +1,119 @@
+body {
+    overflow: hidden;
+    margin: auto;
+    padding: auto;
+}
+
+.login {
+    position: absolute;
+    width: 173px;
+    height: 217px;
+    left: 50%;
+    top: 50%;
+    transition: 1s;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    color: white;
+}
+
+.login .logo {
+    width: 100px;
+    height: 100px;
+    margin-left: 30%;
+    transition: 0.6s ;
+}
+
+.login .logo:hover {
+    transform: scale(1.1);
+}
+
+input,
+input::placeholder,
+button {
+    display: block;
+    background: none;
+    outline: none;
+    border: none;
+    color: black;
+}
+
+/*Inputs*/
+
+.login .username,
+.login .password {
+    margin-bottom: 5%;
+}
+
+.login .username,
+.login .password {
+    background: rgba(255, 255, 255, 0.877);
+    width: 113px;
+    height: 30px;
+    transition: 0.6s;
+    border-radius: 8px;
+}
+
+.login .username:hover,
+.login .username:focus,
+.login .password:hover,
+.login .password:focus {
+    width: 180px;
+}
+
+/*Buttons*/
+
+.login .register,
+.login .join {
+    cursor: pointer;
+    margin-right: 3%;
+}
+
+.login .join {
+    background: rgba(255, 255, 255, 0.877);
+    display: inline;
+    width: 98px;
+    height: 35px;
+    transition: 0.6s;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: black;
+}
+
+.login .join:hover {
+    border: 1px solid rgb(255, 133, 32);
+    width: 113px;
+}
+
+.login .imgjoin {
+    padding-top: 2%;
+    width: 25px;
+    height: 25px;
+}
+
+.login .register {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.877);
+    display: inline;
+    width: 50px;
+    transition: 0.6s;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: black;
+}
+
+.login .register:hover {
+    border: 1px solid rgb(255, 133, 32);
+    width: 68px;
+}
+
+.login .imgregister {
+    width: 24px;
+    height: 24px;
+}
+
+/*Hide*/
+
+.hide {
+    top: 200%;
+}

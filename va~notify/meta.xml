@@ -1,0 +1,22 @@
+<meta>
+    <info author="azarado" name="Notify System (NS)" version="1.0.0"/>
+
+    <script src="voidacademy_client.lua" type="client"/>
+    <script src="voidacademy_server.lua" type="server"/>
+
+    <file src="nui/css.css"/>
+    <file src="nui/jquery-1.11.3.min.js"/>
+    <file src="nui/jquery.js"/>
+    <file src="nui/nui.html"/>
+    <file src="nui/images/bag.svg"/>
+    <file src="nui/images/bell.svg"/>
+    <file src="nui/images/chat-square-text.svg"/>
+    <file src="nui/images/check2-circle.svg"/>
+    <file src="nui/images/exclamation-circle.svg"/>
+    <file src="nui/images/telephone-inbound.svg"/>
+    <file src="nui/images/x-circle.svg"/>
+
+    <export function="createNotify" type="shared"/>
+    <export function="createNotifyS" type="shared"/>
+
+</meta>

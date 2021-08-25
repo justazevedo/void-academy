@@ -1,0 +1,21 @@
+<meta>
+    <info author="azarado" name="Main System (MS)" version="1.0.0"/>
+
+    <script src="shared/general.lua" type="shared"/>
+    <script src="shared/player.lua" type="shared"/>
+
+    <script src="server/discord.lua" type="server"/>
+    <script src="server/resources.lua" type="server"/>
+    <script src="server/save.lua" type="server"/>
+    <script src="server/player.lua" type="server"/>
+
+    <export function="spawn" type="shared"/>
+    <export function="playerSave" type="shared"/>
+	<export function="sendLogs" type="shared"/>
+    <export function="getPlayerID" type="shared"/>
+    <export function="getNearestElement" type="shared"/>
+
+	<include resource="va~librarys"/>
+
+    <min_mta_version server="1.5.4-9.11413"></min_mta_version>
+</meta>

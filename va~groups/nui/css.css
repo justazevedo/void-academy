@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
+  user-select: none;
+  background: currentColor !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f10c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.groups {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 5%;
+}
+
+#button {
+  background: url('./images/groove.png') no-repeat #fff center;
+  background-size: 70%;
+  width: 300px;
+  height: 200px;
+  position: relative;
+  left: 3%;
+  top: 10%;
+  display: inline-grid;
+  transition: 0.3s;
+  margin-top: 0.3%;
+}
+
+#text {
+  font-weight: 600;
+  font-size: 40px;
+  color: orange;
+  position: relative;
+  text-align: center;
+  top: 38%;
+}
+
+#button:hover {
+  filter: brightness(0.6);
+}

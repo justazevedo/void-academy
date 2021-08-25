@@ -1,0 +1,15 @@
+<meta>
+    <info author="azarado" name="Radio System (RS)" version="1.0.0"/>
+
+    <script src="va_client.lua" type="client"/>
+    <script src="va_server.lua" type="server"/>
+
+    <file src="nui/images/clock.ttf"/>
+    <file src="nui/images/radio.png"/>
+    <file src="nui/css.css"/>
+    <file src="nui/nui.html"/>
+    <file src="nui/scripts.js"/>
+
+    <export function="toggleRadio" type="client"/>
+
+</meta>

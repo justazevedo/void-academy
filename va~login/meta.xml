@@ -1,0 +1,15 @@
+<meta>
+    <info author="azarado" name="Login System (LS)" version="1.0.0"/>
+
+    <script src="voidacademy_client.lua" type="client"/>
+    <script src="voidacademy_server.lua" type="server"/>
+
+    <file src="nui/css.css"/>
+    <file src="nui/jquery-1.11.3.min.js"/>
+    <file src="nui/nui.html"/>
+    <file src="nui/script.js"/>
+    <file src="nui/images/logo.png"/>
+    <file src="nui/images/add-user-male.png"/>
+    <file src="nui/images/enter-2.png"/>
+
+</meta>

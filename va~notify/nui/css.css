@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: sans-serif;
+    background: transparent !important;
+    box-sizing: border-box;
+}
+
+.main {
+    position: relative;
+    left: 70%;
+    top: 3%;
+}
+
+.main .notification {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    transition: 0.6s;
+    -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+    margin: 5px;
+    padding: 10px;
+    padding-left: 1.5%;
+    border-radius: 8px;
+    max-width: 300px;
+    height: auto;
+    user-select: none;
+    min-height: 5px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-left: 3px solid #ff880054;
+}
+
+.notification .message {
+    color: black;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+    width: 85%;
+    height: 85%;
+    padding: 0.5rem;
+}
+
+.info {
+    background: url('./images/exclamation-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.success {
+    background: url('./images/check2-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.error {
+    background: url('./images/x-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.warning {
+    background: url('./images/bell.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.communicate {
+    background: url('./images/chat-square-text.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.buys {
+    background: url('./images/bag.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.discord {
+    background: url('./images/telephone-inbound.svg') no-repeat rgba(255, 255, 255, 0.877);
+    background-position: 10px;
+    background-size: 5%;
+}
+
+.unfold {
+    -webkit-animation: unfold 10s ease;
+            animation: unfold 10s ease;
+}
+
+.fold {
+    -webkit-animation: fold 2s ease;
+            animation: fold 2s ease;
+}
+
+/*KeyFrames*/
+
+@-webkit-keyframes fold {
+    0% {
+      opacity: 0.8;
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+    }
+    6%,
+    20%,
+    80% {
+      opacity: 0;
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+    }
+  }
+  
+@keyframes fold {
+    0% {
+      opacity: 0.8;
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+    }
+    6%,
+    20%,
+    80% {
+      opacity: 0;
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+    }
+  }
+  
+@-webkit-keyframes unfold {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(50%);
+              transform: translateX(50%);
+    }
+    6%,
+    20%,
+    80% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+  }
+  
+@keyframes unfold {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(50%);
+              transform: translateX(50%);
+    }
+    6%,
+    20%,
+    80% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+  }
