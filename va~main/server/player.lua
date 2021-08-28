@@ -12,7 +12,7 @@ function playerID( thePreviousAccount, theCurrentAccount, autologin )
         if ( playerID ) then
             setElementData( source, "va.playerID", playerID )
         else
-            setElementData( source, "va.playerID", nil )
+            setElementData( source, "va.playerID", -1 )
             return
         end
     else
