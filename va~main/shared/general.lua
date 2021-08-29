@@ -10,5 +10,7 @@ listResources = {
     'admin',
     'inventory',
     'groups',
-    'weapons'
+    'weapons',
+    'voice',
+    'radio'
 }

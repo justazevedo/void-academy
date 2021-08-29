@@ -1,6 +1,6 @@
 function onStartup( )
     for index, value in ipairs( groups ) do
-        teams = createTeam( string.gsub( groups[index].name, "_", " "), groups[index].color[1], groups[index].color[2], groups[index].color[3] )
+        teams = createTeam( string.gsub( groups[index].name, "_", " " ), groups[index].color[1], groups[index].color[2], groups[index].color[3] )
     end
 end
 addEventHandler( "onResourceStart", resourceRoot, onStartup )

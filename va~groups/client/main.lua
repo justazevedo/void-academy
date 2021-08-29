@@ -18,7 +18,14 @@ function loadGroups( )
     exports["va~interface"]:setInterface( false )
     for index, value in ipairs( groups ) do
         name = groups[index].name
-        executeBrowserJavascript( nui, "window.postMessage( { id : ".. index ..", name : '".. name .."' }, '*' )" )
+        executeBrowserJavascript( nui, "window.postMessage( { id : ".. index ..", name : '".. name .."', players : 0, vagas : ".. groups[index].vagas .." }, '*' )" )
+        playerAt = setTimer( function( )
+            local count = countPlayersInTeam( getTeamFromName( string.gsub( groups[index].name, "_", " " ) ) )
+            if count > 0 then
+                executeBrowserJavascript( nui, "window.postMessage( { editID : ".. index ..", editName : '".. groups[index].name .."', editPlayers : ".. count ..", editVagas : ".. groups[index].vagas .." }, '*' )" )
+            else
+            end
+        end, 2000, 0 )
     end
 end
 
@@ -38,12 +45,22 @@ function justShow()
     setElementRotation( localPlayer, -0, 0, 247.2734 )
     showChat( false )
     exports["va~interface"]:setInterface( false )
+    playerAt = setTimer( function( )
+        local count = countPlayersInTeam( getTeamFromName( string.gsub( groups[index].name, "_", " " ) ) )
+        if count > 0 then
+            executeBrowserJavascript( nui, "window.postMessage( { editID : ".. index ..", editName : '".. groups[index].name .."', editPlayers : ".. count ..", editVagas : ".. groups[index].vagas .." }, '*' )" )
+        else
+        end
+    end, 2000, 0 )
 end
 addCommandHandler( "trocartime", justShow )
 addEvent( 'va.justShow', true )
 addEventHandler( 'va.justShow', root, justShow )
 
 function closeGroups()
+    if isTimer( playerAt ) then
+        killTimer( playerAt )
+    end
     guiSetVisible( browser, false )
     exports["va~interface"]:setInterface( true )
     showChat( true )
@@ -58,18 +75,24 @@ function setSkin( gangID, id )
         local skin = groups[gangID].skin[id]
         setElementModel( localPlayer, skin )
     else
-        return print( 'error' )
+        return exports["va~notify"]:createNotify( localPlayer, 'error', 'Ocorreu algum error contate um administrador' )
     end
 end
 addEvent( 'va.setSkin', true )
 addEventHandler( 'va.setSkin', root, setSkin )
+
+function errorMessage( event )
+    if event == "lotado" then
+        exports["va~notify"]:createNotify( localPlayer, 'error', 'Este grupo está lotado!' )
+    end
+end
 
 function selectedSkin( gangID, id )
     gangID = tonumber( gangID ) id = tonumber( id )
     if gangID ~= 0 and groups[gangID].skin[id] then
         triggerServerEvent( 'va.spawnGroups', localPlayer, localPlayer, groups[gangID].spawn[1], groups[gangID].spawn[2], groups[gangID].spawn[3], groups[gangID].skin[id], string.gsub( groups[gangID].name, "_", " ") )
     else
-        return print( 'skin not found!' )
+        return exports["va~notify"]:createNotify( localPlayer, 'error', 'Ocorreu algum error contate um administrador' )
     end
 end
 addEvent( 'va.selectedSkin', true )
