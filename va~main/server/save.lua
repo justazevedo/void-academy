@@ -26,9 +26,21 @@ function onLogout( )
 end
 addEventHandler( "onPlayerLogout", getRootElement( ), onLogout )
 
+function exitDuty( player )
+    local time = getRealTime()
+	local hours = time.hour
+	local minutes = time.minute
+	local seconds = time.second
+    if getElementData( player, "va.onDuty" ) then
+        exports["va~main"]:batePonto( 'voidAcademy - Staffs', "16750848", "O staff **".. getPlayerName( player ) .."** **ID:".. getElementData( player, "va.playerID" ) .."** saiu de serviço as **".. hours ..":".. minutes ..":".. seconds .."**", 'Desenvolvido por azarado bugs' )
+        setElementData( player, "va.onDuty", false )
+    end
+end
+
 function playerSave( quitType, reason, responsibleElement )
     if not ( isGuestAccount ( getPlayerAccount ( source ) ) ) then
         account = getPlayerAccount( source )
+        exitDuty( source )
         if ( account ) then
             setAccountData( account, "va.money", tostring( getPlayerMoney( source ) ) )
             setAccountData( account, "va.skin", tostring( getElementModel( source ) ) )

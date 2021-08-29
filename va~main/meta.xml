@@ -12,8 +12,10 @@
     <export function="spawn" type="shared"/>
     <export function="playerSave" type="shared"/>
 	<export function="sendLogs" type="shared"/>
+    <export function="batePonto" type="shared"/>
     <export function="getPlayerID" type="shared"/>
     <export function="getNearestElement" type="shared"/>
+    <export function="isEventHandlerAdded" type="shared"/>
 
 	<include resource="va~librarys"/>
 

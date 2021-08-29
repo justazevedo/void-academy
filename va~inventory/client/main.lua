@@ -657,7 +657,7 @@ function clickInventory(button, state, _, _, _, _, _, element)
 		end
 		movedItem = {}
 	elseif button == 'right' and state == 'down' and not showInventory and element then 
-		if getElementType(element) == "vehicle" and not cursorinInventory and not isMove and getElementData(element, "va.ownerCar") == getElementData(localPlayer, "va.id") or getElementData( localPlayer, "va.adminlevel" ) or 0 > 5  then --tonumber(getElementData(element, "dbid")) or -1 > 0 then
+		--[[if getElementType(element) == "vehicle" and not cursorinInventory and not isMove and getElementData(element, "va.ownerCar") == getElementData(localPlayer, "va.id") or getElementData( localPlayer, "va.adminlevel" ) or 0 > 5  then --tonumber(getElementData(element, "dbid")) or -1 > 0 then
 			if isTimer(packetTimer) then return end
 			local x,y,z = getElementPosition(localPlayer)
 			local x2,y2,z2 = getElementPosition(element)
@@ -678,7 +678,7 @@ function clickInventory(button, state, _, _, _, _, _, element)
 					exports["va~notify"]:createNotify( element, 'error', 'O inventário selecionado já está em uso.' )
 				end
 			end
-		end
+		end]]
 		--[[elseif getElementType(element) == "vehicle" and not cursorinInventory and not isMove then
 		if (getElementData(localPlayer, "va.adminlevel") or 0) >= 4 or getElementData(getLocalPlayer(), "va.dutyfaction") == 17 or getElementData(getLocalPlayer(), "va.dutyfaction") == 16 or getElementData(getLocalPlayer(), "va.dutyfaction") == 22  or getElementData(getLocalPlayer(), "va.dutyfaction") == 11 or getElementData(getLocalPlayer(), "va.dutyfaction") == 2 or getElementData(getLocalPlayer(), "va.dutyfaction") == 6 or getElementData(getLocalPlayer(), "va.dutyfaction") == 5 or getElementData(getLocalPlayer(), "va.dutyfaction") == 19 or getElementData(getLocalPlayer(), "va.dutyfaction") == 20 or getElementData(getLocalPlayer(), "va.dutyfaction") == 21 or getElementData(getLocalPlayer(), "va.dutyfaction") == 24 then
 			local x,y,z = getElementPosition(localPlayer)

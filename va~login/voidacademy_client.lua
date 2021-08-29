@@ -31,9 +31,7 @@ function loginPanel( player, event )
             showChat( true )
             toggleAllControls( true )
             setElementFrozen( player, false )
-            exports["va~interface"]:setInterface( true )
-            triggerServerEvent( "va.spawn", player, player, 1227.84949, -1388.26233, 13.41935, 175, 0, 0, false )
-            setCameraTarget( player )
+            triggerEvent( 'va.showGroups', player )
         end, 1500, 1 )
     end
 end

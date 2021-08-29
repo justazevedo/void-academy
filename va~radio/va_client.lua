@@ -17,6 +17,9 @@ function toggleRadio( )
 		toggleAllControls( true )
 		showCursor( false )
 	else
+		if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
+			--executeBrowserJavaScript( nui, "window.postMessage( { frequency : ".. getElementData( localPlayer, "va.frequencyR" ) or false .." }, '*' )")
+		end
 		guiSetVisible( browser, true )
 		setElementData( localPlayer, "va.enabledRadio", true )
 		toggleAllControls( false )
@@ -37,11 +40,25 @@ bindKey( 'backspace', 'down',
 	end
 )
 
+bindKey( 'tab', 'both',
+	function( key, keyState )
+		if keyState == "down" then
+			if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
+				setElementData( localPlayer, "va.radioLiberado", true )
+			else
+				setElementData( localPlayer, "va.radioLiberado", false )
+			end
+		elseif keyState == "up" then
+			setElementData( localPlayer, "va.radioLiberado", false )
+		end
+	end
+)
+
 function recieverFrequency( frequency )
 	if frequency then
-		print( frequency )
+		setElementData( localPlayer, "va.frequencyR", frequency )
+		exports["va~voice"]:toggleRadio()
 	else
-		print( frequency )
 		return exports["va~notify"]:createNotify( localPlayer, "info", "Coloque uma frequência correta." )
 	end
 end

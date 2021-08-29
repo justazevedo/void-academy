@@ -42,12 +42,12 @@ body {
     transform: skew(-8deg);
     border-radius: 3px;
     margin-left: 2%;
-    border: solid 1px rgb(6, 187, 0);
+    border: solid 1px rgb(255, 145, 0);
     background-color: rgba(6, 187, 0, 0);
 }
 
 .healthBox {
-    background-color: rgba(6, 187, 0, 0.753);
+    background-color: rgba(255, 145, 0, 0.753);
     position: relative;
     transition: 0.3s;
 	width: 100%;

@@ -1,4 +1,7 @@
 ﻿function useItem(DBID, itemSlot, itemID, itemValue, itemCount, itemType )
+	if itemID == 1 then
+		exports["va~radio"]:toggleRadio()
+	end
 	if getItemType( itemID ) == 'weapon' then
 		triggerServerEvent( "va.setWeapon", localPlayer, localPlayer, itemSlot, itemID )
 	end

@@ -8,16 +8,18 @@ function submitFrequency() {
 
     if (buttonJoin.innerHTML == 'Sair') {
         buttonJoin.innerHTML = 'Entrar'
+        mta.triggerEvent( 'va.sendFrequency', 0 );
+        frequencyInput = "";
     } else {
+        mta.triggerEvent( 'va.sendFrequency', frequencyInput );
         buttonJoin.innerHTML = 'Sair'
     }
-    mta.triggerEvent( 'va.sendFrequency', frequencyInput );
 };
 
 $(document).ready(function() {
     window.addEventListener( 'message', (event) => {
         let item = event.data
 
-        $(".frequency").innerHTML = item.frequency;
+        $("#frequency").val(item.frequency)
     });
 });

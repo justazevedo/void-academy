@@ -1,3 +1,26 @@
 <meta>
+    <info author="azarado" name="Group System (GS)" version="1.0.0"/>
+
+    <script src="shared/general.lua" type="shared"/>
+
+    <script src="client/main.lua" type="client"/>
+
+    <script src="server/main.lua" type="server"/>
+    
+    <file src="nui/images/aztecas.png"/>
+    <file src="nui/images/ballas.png"/>
+    <file src="nui/images/grove.png"/>
+    <file src="nui/images/mafia.png"/>
+    <file src="nui/images/pedreiros.png"/>
+    <file src="nui/images/pizza.png"/>
+    <file src="nui/images/rifas.png"/>
+    <file src="nui/images/vagos.png"/>
+    <file src="nui/css.css"/>
+    <file src="nui/jquery-1.11.3.min.js"/>
+    <file src="nui/jquery.js"/>
+    <file src="nui/nui.html"/>
+
+    <export function="showGroups" type="client"/>
+    <export function="closeGroups" type="client"/>
 
 </meta>

@@ -1,8 +1,13 @@
-
 function playerJoin()
     fadeCamera( source, true, 5 )
     setCameraMatrix( source, 1335.1314697266, -1400.3842773438, 33.302700042725, 1334.1617431641, -1400.3864746094, 33.058326721191, 0, 90 )
-    triggerClientEvent( source, "va.loginPanel", source, source, "show" )
+    if triggerClientEvent( source, "va.loginPanel", source, source, "show" ) then
+        if isTimer( timer ) then
+            killTimer( timer )
+        end
+    else
+        timer = setTimer( playerJoin, 2000, 0 )
+    end
 end
 addEventHandler( "onPlayerJoin", root, playerJoin )
 

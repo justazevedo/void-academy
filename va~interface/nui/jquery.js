@@ -28,7 +28,7 @@ $(document).ready(function() {
             $(".healthBox").css("background-color", "rgba(187, 0, 0, 0.753)");
             $(".healthBox").addClass("healthLow");
         } else {
-            $(".healthBox").css("background-color", "rgba(6, 187, 0, 0.753)");
+            $(".healthBox").css("background-color", "rgba(255, 145, 0, 0.753)");
             $(".healthBox").removeClass("healthLow");
         }
 

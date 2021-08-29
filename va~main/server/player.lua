@@ -1,5 +1,5 @@
-function spawn( player, x, y, z, rot, int, dim, team )
-    spawnPlayer( player, x, y, z, rot, getElementModel( source ), int, dim, team )
+function spawn( player, x, y, z, rot, model, int, dim, team )
+    spawnPlayer( player, x, y, z, rot, model, int, dim )
     setElementHealth( player, 100 )
     setPedArmor( player, 100 )
 end
@@ -20,3 +20,15 @@ function playerID( thePreviousAccount, theCurrentAccount, autologin )
     end
 end
 addEventHandler( "onPlayerLogin", getRootElement( ), playerID )
+
+function playerDamage( attacker, weapon, bodypart, loss )
+    if getElementData( source, "va.onDuty" ) then
+        cancelEvent()
+    end
+end
+
+for index, teams in ipairs( getElementsByType( "team" ) ) do
+    if ( getTeamFriendlyFire( teams ) == true ) then
+        setTeamFriendlyFire( teams, false )
+    end
+end

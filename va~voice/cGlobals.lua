@@ -17,8 +17,10 @@ function()
             voicePlayers[source] = true 
 		elseif falandoRadio[source] and getElementData( localPlayer,"va.frequencyR" ) == getElementData( source,"va.frequencyR" ) then
 			if getElementData( localPlayer,"va.frequencyR" ) == nil or getElementData( source,"va.frequencyR" ) == nil then
-				cancelEvent()
-				return
+				if not getElementData( source, "va.radioLiberado") then
+					cancelEvent()
+					return
+				end
 			end
 			if not sound then
 			local sound = playSound("audio/start.wav")

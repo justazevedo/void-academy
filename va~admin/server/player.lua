@@ -1,4 +1,37 @@
+teamStaff = createTeam( "Staff", 155, 155, 155 )
 
+function adminDuty( player, commandName )
+    local time = getRealTime()
+	local hours = time.hour
+	local minutes = time.minute
+	local seconds = time.second
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        if not getElementData( player, "va.onDuty" ) or false then
+            exports["va~main"]:batePonto( 'voidAcademy - Staffs', "16750848", "O staff **".. getPlayerName( player ) .."** **ID:".. getElementData( player, "va.playerID" ) .."** entrou em serviço as **".. hours ..":".. minutes ..":".. seconds .."**", 'Desenvolvido por azarado bugs' )
+            exports["va~notify"]:createNotifyS( player, "success", "Você entrou em serviço" )
+            setElementData( player, "va.onDuty", true )
+            setElementHealth( player, 100 )
+            setPedArmor( player, 100 )
+            setPlayerTeam( player, teamStaff )
+        else
+            if ( exports["va~freecam"]:isPlayerFreecamEnabled( player ) ) then
+                exports["va~freecam"]:setPlayerFreecamDisabled( player )
+                setElementAlpha( player, 255 )
+                setElementFrozen( player, false )
+            end
+            exports["va~main"]:batePonto( 'voidAcademy - Staffs', "16750848", "O staff **".. getPlayerName( player ) .."** **ID:".. getElementData( player, "va.playerID" ) .."** saiu de serviço as **".. hours ..":".. minutes ..":".. seconds .."**", 'Desenvolvido por azarado bugs' )
+            exports["va~notify"]:createNotifyS( player, "info", "Você saiu de serviço" )
+            setElementData( player, "va.onDuty", false )
+            setElementHealth( player, 100 )
+            setPedArmor( player, 100 )
+            setPlayerTeam( player, nil )
+            triggerClientEvent( player, 'va.justShow', player )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.adminDuty[1], adminDuty )
 
 function banPlayer( player, commandName, id, timeBan, reasonBan )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 3 ) then
@@ -19,6 +52,31 @@ function banPlayer( player, commandName, id, timeBan, reasonBan )
     end
 end
 addCommandHandler( commandsAdmin.banPlayer[1], banPlayer )
+
+function godPlayer( player, commandName, id )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        if id then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                setElementHealth( targetPlayer, 100 )
+                setPedArmor( targetPlayer, 100 )
+                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** usou o **/".. commandName .."** no jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+                exports["va~notify"]:createNotifyS( player, "info", "O administrador ".. getPlayerName( player ) .." usou o /".. commandName .." em você." )
+                exports["va~notify"]:createNotifyS( player, "success", "Você usou o /".. commandName .." no jogador ".. getPlayerName( targetPlayer ) .."." )
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            setElementHealth( player, 100 )
+            setPedArmor( player, 100 )
+            exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** usou o /".. commandName, 'Desenvolvido por azarado bugs' )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.godPlayer[1], godPlayer )
 
 function setHealth( player, commandName, id, health )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
@@ -142,14 +200,14 @@ function noClip( player, commandName )
             local x, y, z = getElementPosition( player )
             exports["va~freecam"]:setPlayerFreecamEnabled( player, x, y, z )
             setElementPosition( player, x, y, z - 10 )
-            setElementFrozen( player, true )
+            toggleControl( player, "walk", false )
             setElementAlpha( player, 0 )
             exports["va~notify"]:createNotifyS( player, "info", "Você entrou no modo noClip." )
         else
             local x, y, z = getCameraMatrix( player )
             exports["va~freecam"]:setPlayerFreecamDisabled( player )
             setElementPosition( player, x, y, z )
-            setElementFrozen( player, false )
+            toggleControl( player, "walk", true )
             setElementAlpha( player, 255 )
             setCameraTarget( player )
             exports["va~notify"]:createNotifyS( player, "info", "Você saiu do modo noClip." )

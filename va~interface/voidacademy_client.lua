@@ -17,9 +17,35 @@ function isEventHandlerAdded( sEventName, pElementAttachedTo, func )
     return false
 end
 
+voice = 0
+
 function browserRender()
+    if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
+        if getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
+            dxDrawText("Frequencia: #fff000".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8516, screenH * 0.9861, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        else
+            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8516, screenH * 0.9861, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        end
+    end
+    if not getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
+        dxDrawText("Voice: #fff000Ativado", screenW * 0.9115, screenH * 0.9861, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+    else
+        dxDrawText("Voice: Desativado", screenW * 0.9050, screenH * 0.9861, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+    end
     dxDrawImage( 0, 0, screenW, screenH, browser, 0, 0, 0, tocolor(255, 255, 255, 255) )
 end
+
+addEventHandler( "onClientPlayerVoiceStart", root,
+    function( )
+        voice = 1
+    end
+)
+
+addEventHandler( "onClientPlayerVoiceStop", root,
+    function( )
+        voice = 0
+    end
+)
 
 addEventHandler("onClientBrowserCreated", browser, 
 	function()

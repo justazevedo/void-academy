@@ -10,33 +10,16 @@
     </head>
     <body>
         <div class="infos">
-            <div class="groups">
-                <div class="grove group">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
-                <div class="grove group">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
-                <div class="grove group group2">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
+            <div class="groups" id="groups">
             </div>
-            <div class="groups">
-                <div class="grove group">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
-                <div class="grove group">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
-                <div class="grove group group2">
-                    <div class="players">0/20</div>
-                    <button class="joingroup">Entrar</button>
-                </div>
+            <div class="skins" id="skins">
+                <h1 class="textSkin" id="textSkin">N/A</h1>
+                <button onclick="backSkin()" class="skin back">←</button>
+                <button onclick="setSkin( 1 )" class="skin 1">Pegar</button>
+                <button onclick="setSkin( 2 )" class="skin 2">Pegar</button>
+                <button onclick="setSkin( 3 )" class="skin 3">Pegar</button>
+                <button onclick="setSkin( 4 )" class="skin feminina">Pegar</button>
+                <button onclick="selectedSkin()" class="skin selecionar">Selecionar</button>
             </div>
         </div>
     </body>

@@ -1,23 +1,22 @@
 body {
   margin: auto;
   padding: auto;
+  overflow: auto;
   overflow-x: hidden;
-  background: currentColor !important;
+  background: transparent !important;
 }
 
 .groups {
+  display: grid;
+  grid-template-columns: 310px 310px 300px;
+  grid-template-rows: 150px 150px 150px;
   position: relative;
   margin-top: 10%;
-  margin-bottom: -9%;
+  transition: 0.3s;
   left: 15%;
 }
 
 .group {
-  margin-left: 1%;
-}
-
-.grove {
-  display: inline-grid;
   width: 300px;
   height: 140px;
   border-radius: 5px;
@@ -30,8 +29,9 @@ body {
 .players {
   font-family: sans-serif;
   font-size: 21px;
-  font-weight: 500;
+  font-weight: 100;
   position: relative;
+  color: white;
   top: 25%;
   margin-left: 65%;
 }
@@ -42,6 +42,7 @@ body {
   width: 100px;
   height: 30px;
   transition: 0.3s;
+  margin-top: 25%;
   margin-left: 55%;
   border-radius: 5px;
   border: none;
@@ -50,6 +51,118 @@ body {
 .joingroup:hover {
   transform: scale(1.1);
 }
+
+/* Skins */
+
+.skins {
+  display: none;
+  position: relative;
+  left: 55%;
+  margin-top: 200%;
+  width: 270px;
+  height: 250px;
+  transition: 0.3s;
+  background: rgb(124, 124, 124);
+  border-radius: 6px;
+}
+
+.skin {
+  display: block;
+  background: rgb(64, 128, 0);
+  color: white;
+  width: 100px;
+  height: 30px;
+  transition: 0.3s;
+  border-radius: 5px;
+  margin-left: 31%;
+  margin-bottom: 2%;
+  border: none;
+}
+
+.selecionar {
+  margin-left: 23%;
+  width: 150px;
+  margin-top: 5%;
+}
+
+.back {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: -25%;
+  top: 2%;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.skin:hover{
+  transform: scale(1.1);
+  filter: brightness(0.6);
+}
+
+.selecionar:hover {
+  transform: scale(1.2);
+  filter: brightness(1);
+}
+
+.textSkin {
+  color: white;
+  padding-top: 2%;
+  font-family: sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Backgrounds */
+
+div .Grove_Street {
+  background: rgb(124, 124, 124) url('./images/grove.png');
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+}
+
+.Ballas {
+  background: rgb(124, 124, 124) url('./images/ballas.png');
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+}
+
+.Los_Aztecas {
+  background: rgb(124, 124, 124) url('./images/aztecas.png');
+  background-size: 50% 110%;
+  background-repeat: no-repeat;
+}
+
+.Los_Vagos {
+  background: rgb(124, 124, 124) url('./images/vagos.png');
+  background-size: 50% 80%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+}
+
+.Los_Rifas {
+  background: rgb(124, 124, 124) url('./images/rifas.png');
+  background-size: 60% 70%;
+  background-position-y: 45%;
+  background-repeat: no-repeat;
+}
+
+.Mafia {
+  background: rgb(124, 124, 124) url('./images/mafia.png');
+  background-size: 50% 80%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+}
+
+.Pizza_Boi {
+  background: rgb(124, 124, 124) url('./images/pizza.png');
+  background-size: 40% 80%;
+  background-position-x: 10%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+}
+
+
 
 @media screen and (min-width: 1920px) {
   .groups {
@@ -64,6 +177,9 @@ body {
 }
 
 @media screen and (max-width: 800px) {
+  body {
+    overflow: visible;
+  }
   .group2 {
     margin-top: 1%;
   } 
