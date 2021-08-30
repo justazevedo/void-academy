@@ -1,8 +1,16 @@
 function startResources( )
     for resourceIndex, resourceName in ipairs( listResources ) do
-        local resource = getResourceFromName( "va~".. resourceName )
-        outputDebugString( "starting resource NAME: ".. getResourceName( resource ) .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) ..", VERSION: ".. getResourceInfo( resource, "version" ) )
-        startResource( resource )
+        if getServerIP() ~= "auto" then
+            local resource = getResourceFromName( "va~".. resourceName )
+            stopResource( resource )
+            return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+        else
+            setTimer( function( )
+                local resource = getResourceFromName( "va~".. resourceName )
+                outputDebugString( "starting resource NAME: ".. getResourceName( resource ) .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) ..", VERSION: ".. getResourceInfo( resource, "version" ) )
+                startResource( resource )
+            end, 5000, 1 )
+        end
     end
 end
 addEventHandler( "onResourceStart", resourceRoot, startResources )
@@ -19,4 +27,8 @@ function isEventHandlerAdded( sEventName, pElementAttachedTo, func )
         end
     end
     return false
+end
+
+function getServerIP()
+    return getServerConfigSetting("serverip")
 end

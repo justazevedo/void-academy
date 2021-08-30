@@ -1,3 +1,8 @@
+if fileExists( ':va~login/server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function playerJoin()
     fadeCamera( source, true, 5 )
     setCameraMatrix( source, 1335.1314697266, -1400.3842773438, 33.302700042725, 1334.1617431641, -1400.3864746094, 33.058326721191, 0, 90 )

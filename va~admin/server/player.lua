@@ -1,5 +1,10 @@
 teamStaff = createTeam( "Staff", 155, 155, 155 )
 
+if fileExists( ':va~admin/server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function adminDuty( player, commandName )
     local time = getRealTime()
 	local hours = time.hour

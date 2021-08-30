@@ -1,3 +1,8 @@
+if fileExists( 'server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function onStartup( )
     for index, value in ipairs( groups ) do
         teams = createTeam( string.gsub( groups[index].name, "_", " " ), groups[index].color[1], groups[index].color[2], groups[index].color[3] )

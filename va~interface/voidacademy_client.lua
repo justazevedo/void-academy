@@ -3,6 +3,11 @@ local browser = createBrowser( screenW, screenH, true, true )
 local link = "http://mta/local/nui/nui.html"
 local components = { "weapon", "ammo", "health", "clock", "money", "breath", "armour", "wanted", "radar", "area_name", "radio", "vehicle_name" }
 
+if fileExists( ':va~interface/server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function isEventHandlerAdded( sEventName, pElementAttachedTo, func )
     if type( sEventName ) == 'string' and isElement( pElementAttachedTo ) and type( func ) == 'function' then
         local aAttachedFunctions = getEventHandlers( sEventName, pElementAttachedTo )

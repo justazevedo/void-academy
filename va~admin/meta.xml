@@ -7,5 +7,6 @@
 
     <script src="server/player.lua" type="server"/>
     <script src="server/vehicle.lua" type="server"/>
+    <script src="server/resource.lua" type="server"/>
 
 </meta>

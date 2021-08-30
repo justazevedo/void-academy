@@ -9,7 +9,9 @@
     <script src="server/save.lua" type="server"/>
     <script src="server/player.lua" type="server"/>
 
-    <export function="spawn" type="shared"/>
+    <export function="spawn" type="server"/>
+    <export function="getServerIP" type="server"/>
+    
     <export function="playerSave" type="shared"/>
 	<export function="sendLogs" type="shared"/>
     <export function="batePonto" type="shared"/>

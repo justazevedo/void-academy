@@ -9,6 +9,7 @@
     <script src="client/models.lua" type="client"/>
     
     <script src="server/main.lua" type="server"/>
+    <script src="server/resource.lua" type="server"/>
 
     <file src="skins/ak_flamengo.jpg"/>
     <file src="skins/awp_flamengo.jpg"/>

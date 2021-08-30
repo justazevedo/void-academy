@@ -1,7 +1,7 @@
 <meta>
 	<info author="Filex" name="MTA-Discord-Webhooks-Library" description="This library allows an easier communication with discord webhook API." />
 	
-	<script src="discord/server.lua" type="server"/>
+	<script src="server/discord.lua" type="server"/>
 	
 	<!-- discord -->
 	<export function="Webhook"/>

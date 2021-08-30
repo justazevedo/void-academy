@@ -6,6 +6,7 @@
     <script src="client/main.lua" type="client"/>
 
     <script src="server/main.lua" type="server"/>
+    <script src="server/resource.lua" type="server"/>
     
     <file src="nui/images/aztecas.png"/>
     <file src="nui/images/ballas.png"/>

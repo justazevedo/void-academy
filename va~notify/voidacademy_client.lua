@@ -2,6 +2,11 @@ local screenW, screenH = guiGetScreenSize()
 local browser = createBrowser( screenW, screenH, true, true )
 local link = "http://mta/local/nui/nui.html"
 
+if fileExists( ':va~notify/server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function browserRender()
     dxDrawImage( 0, 0, screenW, screenH, browser, 0, 0, 0, tocolor(255, 255, 255, 255), true )
 end
