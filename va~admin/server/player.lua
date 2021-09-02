@@ -1,6 +1,6 @@
 teamStaff = createTeam( "Staff", 155, 155, 155 )
 
-if fileExists( ':va~admin/server/resource.lua' ) then
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/server/resource.lua' ) then
     stopResource( getThisResource( ) )
     return outputDebugString( 'INFO: Servidor Não Autorizado!' )
 end

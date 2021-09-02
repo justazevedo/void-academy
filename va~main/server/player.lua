@@ -1,3 +1,8 @@
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/server/resources.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function spawn( player, x, y, z, rot, model, int, dim, team )
     spawnPlayer( player, x, y, z, rot, model, int, dim )
     setElementHealth( player, 100 )

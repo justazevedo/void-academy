@@ -4,7 +4,7 @@ local nui = guiGetBrowser( browser )
 local link = "http://mta/local/nui/nui.html"
 guiSetVisible( browser, false )
 
-if fileExists( ':va~radio/server/resource.lua' ) then
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
     stopResource( getThisResource( ) )
     return outputDebugString( 'INFO: Servidor Não Autorizado!' )
 end

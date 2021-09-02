@@ -1,3 +1,8 @@
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/server/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function setTexture( element, name, texture )
     if element and name and texture then
         triggerClientEvent( root, "va.applyTexture", root, element, name, texture )
