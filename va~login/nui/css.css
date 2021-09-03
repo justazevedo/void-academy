@@ -2,6 +2,7 @@ body {
     overflow: hidden;
     margin: auto;
     padding: auto;
+    background: currentColor !important;
 }
 
 .login {
@@ -57,6 +58,7 @@ button {
 .login .username:focus,
 .login .password:hover,
 .login .password:focus {
+    background: rgba(255, 230, 209, 0.877);
     width: 180px;
 }
 
@@ -80,6 +82,7 @@ button {
 }
 
 .login .join:hover {
+    background: rgba(255, 190, 137, 0.877);
     border: 1px solid rgb(255, 133, 32);
     width: 113px;
 }
@@ -103,6 +106,7 @@ button {
 }
 
 .login .register:hover {
+    background: rgba(255, 190, 137, 0.877);
     border: 1px solid rgb(255, 133, 32);
     width: 68px;
 }
@@ -112,7 +116,16 @@ button {
     height: 24px;
 }
 
-/*Hide*/
+/*Others*/
+
+.credits {
+    position: absolute;
+    font-size: 10px;
+    font-family: sans-serif;
+    top: 98%;
+    color: white;
+    user-select: none;
+}
 
 .hide {
     top: 200%;

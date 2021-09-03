@@ -35,27 +35,32 @@ function panelFunctions( player, event, username, password )
                     return
                 end
             else
-                return
+                return exports["va~notify"]:createNotifyS( player, "error", "Sua senha precisa conter mais que 4 caracteres!" )
             end
         else
-            return
+            return exports["va~notify"]:createNotifyS( player, "error", "Seu nome de usúario precisa conter mais que 4 caracteres!" )
         end
     elseif event == "register" then
-        if ( username ~= "" and username ~= nil or not string.len( username ) > 4 ) then
-            if ( password ~= "" and password ~= nil or not string.len( password ) > 4 ) then
-                local newAccount = addAccount( username, password )
-                if ( newAccount ) then
-                    setElementData( player, "va.newPlayer", true )
-                    exports["va~notify"]:createNotifyS( player, "success", "Conta registrada!" )
+        local getAccounts = getAccountsBySerial( getPlayerSerial( player ) )
+        if not getAccounts[1] then
+            if ( username ~= "" and username ~= nil or not string.len( username ) > 4 ) then
+                if ( password ~= "" and password ~= nil or not string.len( password ) > 4 ) then
+                    local newAccount = addAccount( username, password )
+                    if ( newAccount ) then
+                        setElementData( player, "va.newPlayer", true )
+                        exports["va~notify"]:createNotifyS( player, "success", "Conta registrada!" )
+                    else
+                        exports["va~notify"]:createNotifyS( player, "error", "Usúario ou senha invalida!" )
+                        return
+                    end
                 else
-                    exports["va~notify"]:createNotifyS( player, "error", "Usúario ou senha invalida!" )
-                    return
+                    return exports["va~notify"]:createNotifyS( player, "error", "Sua senha precisa conter mais que 4 caracteres!" )
                 end
             else
-                return
+                return exports["va~notify"]:createNotifyS( player, "error", "Seu nome de usúario precisa conter mais que 4 caracteres!" )
             end
         else
-            return
+            return exports["va~notify"]:createNotifyS( player, "error", "Você já existe uma conta registrada nesse serial!" )
         end
     end
 end
