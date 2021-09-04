@@ -3,7 +3,7 @@ body {
     padding: 0;
     overflow: hidden;
     font-family: sans-serif;
-    background: transparent !important;
+    background: currentColor !important;
     box-sizing: border-box;
 }
 
@@ -24,14 +24,13 @@ body {
     margin: 5px;
     padding: 10px;
     padding-left: 1.5%;
-    border-radius: 8px;
+    border-radius: 4px;
     max-width: 300px;
     height: auto;
     user-select: none;
     min-height: 5px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-left: 3px solid #ff880054;
 }
 
 .notification .message {
@@ -45,49 +44,57 @@ body {
             flex-flow: column;
     width: 85%;
     height: 85%;
-    padding: 0.5rem;
+    padding-top: 0.5%;
+    padding-left: 3%;
 }
 
 .info {
     background: url('./images/exclamation-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #0059ff;
 }
 
 .success {
     background: url('./images/check2-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #00ff0d;
 }
 
 .error {
     background: url('./images/x-circle.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #ff0000;
 }
 
 .warning {
     background: url('./images/bell.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #eeff00;
 }
 
 .communicate {
-    background: url('./images/chat-square-text.svg') no-repeat rgba(255, 255, 255, 0.877);
-    background-position: 10px;
-    background-size: 5%;
+  background: url('./images/chat-square-text.svg') no-repeat rgba(255, 255, 255, 0.877);
+  background-position: 10px;
+  background-size: 5%;
+  border-left: 3px solid #ff8800;
 }
 
 .buys {
     background: url('./images/bag.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #ff9100;
 }
 
 .discord {
     background: url('./images/telephone-inbound.svg') no-repeat rgba(255, 255, 255, 0.877);
     background-position: 10px;
     background-size: 5%;
+    border-left: 3px solid #04022e;
 }
 
 .unfold {

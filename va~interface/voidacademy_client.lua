@@ -74,10 +74,11 @@ function playerStats( )
     local weapon = getPedWeapon( localPlayer )
     local clips = getPedAmmoInClip( localPlayer )
     if ( weapon ) then
-        executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", ammo : ".. clips ..", money : ".. money ..", opacity : 1 }, '*' )" )
+        local weaponInHand = true
     else
-        executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", ammo : false, money : ".. money ..", opacity : 1 }, '*' )" )
+        local weaponInHand = false
     end
+    executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", energy : ".. energy ..", ammo : ".. weaponInHand ..", money : ".. money ..", opacity : 1 }, '*' )" )
 end
 
 function setInterface( value )
