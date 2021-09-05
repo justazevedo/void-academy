@@ -3,7 +3,7 @@ body {
     padding: 0;
     overflow: hidden;
     font-family: sans-serif;
-    background: currentColor !important;
+    background: transparent !important;
     box-sizing: border-box;
 }
 

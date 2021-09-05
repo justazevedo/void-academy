@@ -45,13 +45,13 @@ function justShow()
     setElementRotation( localPlayer, -0, 0, 247.2734 )
     showChat( false )
     exports["va~interface"]:setInterface( false )
-    playerAt = setTimer( function( )
+    --[[playerAt = setTimer( function( )
         local count = countPlayersInTeam( getTeamFromName( string.gsub( groups[index].name, "_", " " ) ) )
         if count > 0 then
             executeBrowserJavascript( nui, "window.postMessage( { editID : ".. index ..", editName : '".. groups[index].name .."', editPlayers : ".. count ..", editVagas : ".. groups[index].vagas .." }, '*' )" )
         else
         end
-    end, 2000, 0 )
+    end, 2000, 0 )]]
 end
 addCommandHandler( "trocartime", justShow )
 addEvent( 'va.justShow', true )

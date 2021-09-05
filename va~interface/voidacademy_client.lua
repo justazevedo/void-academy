@@ -2,11 +2,7 @@ local screenW, screenH = guiGetScreenSize()
 local browser = createBrowser( screenW, screenH, true, true )
 local link = "http://mta/local/nui/nui.html"
 local components = { "weapon", "ammo", "health", "clock", "money", "breath", "armour", "wanted", "radar", "area_name", "radio", "vehicle_name" }
-
-if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
-    stopResource( getThisResource( ) )
-    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-end
+weaponInHand = false
 
 function isEventHandlerAdded( sEventName, pElementAttachedTo, func )
     if type( sEventName ) == 'string' and isElement( pElementAttachedTo ) and type( func ) == 'function' then
@@ -72,11 +68,12 @@ function playerStats( )
     local armour = getPedArmor( localPlayer )
     local money = getPlayerMoney( localPlayer )
     local weapon = getPedWeapon( localPlayer )
+    local energy = getElementData( localPlayer, "va.energy" ) or 0
     local clips = getPedAmmoInClip( localPlayer )
     if ( weapon ) then
-        local weaponInHand = true
+        weaponInHand = clips
     else
-        local weaponInHand = false
+        weaponInHand = false
     end
     executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", energy : ".. energy ..", ammo : ".. weaponInHand ..", money : ".. money ..", opacity : 1 }, '*' )" )
 end
