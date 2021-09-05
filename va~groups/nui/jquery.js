@@ -50,14 +50,18 @@ const enterSkin = ( id, name, players ) => {
     const textSkin = document.getElementById('textSkin');
 
     textSkin.innerHTML = name.replace("_", " ");
-    document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow: hidden; overflow-x: hidden; background: transparent !important;';
+    document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow-y: hidden; overflow-x: hidden; background: transparent !important;';
     groupsMenu.style.marginTop = "200%";
     setTimeout( () => {
         groupsMenu.style.display = "none";
         skinMenu.style.display = "block";
-        skinMenu.style.marginTop = "10%"
-        document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow: auto; overflow-x: hidden; background: transparent !important;';
     }, 1000 );
+    setTimeout( () => {
+        skinMenu.style.marginTop = "10%"
+    }, 1100 );
+    setTimeout( () => {
+        document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow-y: auto; overflow-x: hidden; background: transparent !important;';
+    }, 2000 );
 };
 
 const backSkin = () => {
@@ -67,13 +71,17 @@ const backSkin = () => {
     const skinMenu = document.getElementById('skins');
 
     skinMenu.style.marginTop = "200%";
-    document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow: hidden; overflow-x: hidden; background: transparent !important;';
+    document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow-y: hidden; overflow-x: hidden; background: transparent !important;';
     setTimeout( () => {
         skinMenu.style.display = "none";
         groupsMenu.style.display = "grid";
-        groupsMenu.style.marginTop = "10%"
-        document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow: auto; overflow-x: hidden; background: transparent !important;';
     }, 1000 );
+    setTimeout( () => {
+        groupsMenu.style.marginTop = "5%"
+    }, 1100 );
+    setTimeout( () => {
+        document.getElementsByTagName('body')[0].style = 'margin: auto; padding: auto; overflow-y: auto; overflow-x: hidden; background: transparent !important;';
+    }, 2000 );
 };
 
 const setSkin = ( id ) => {
