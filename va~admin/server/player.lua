@@ -161,10 +161,14 @@ function givePlayerItem( player, commandName, id, itemID, amountItem )
         if id and itemID and amountItem then
             local targetPlayer = exports["va~main"]:getPlayerID( id )
             if targetPlayer then
-                triggerEvent( "va.inventoryGiveItem", player, targetPlayer, itemID, amountItem, 1 )
-                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou o item de **ID:".. itemID .."** para o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** Quantia: **".. amountItem .."**", 'Desenvolvido por azarado bugs' )
-                exports["va~notify"]:createNotifyS( targetPlayer, "info", "O administrador ".. getPlayerName( player ) .." setou algum item para você." )
-                exports["va~notify"]:createNotifyS( player, "success", "Item setado com sucesso." )
+                if exports["va~inventory"]:giveItem( targetPlayer, itemID, amountItem, amountItem, 0, true ) then
+                    triggerEvent( "va.inventoryGiveItem", player, targetPlayer, itemID, amountItem, 1 )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou o item de **Nome:".. exports["va~inventory"]:getItemName(itemID) .." e ID:".. itemID .."** para o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** Quantia: **".. amountItem .."**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( targetPlayer, "info", "O administrador ".. getPlayerName( player ) .." setou algum item para você." )
+                    exports["va~notify"]:createNotifyS( player, "success", "Item setado com sucesso." )
+                else
+                    return exports["va~notify"]:createNotifyS( player, "error", "Ocorreu algum erro tente novamente!" )
+                end
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
             end
