@@ -15,7 +15,7 @@ addEventHandler("onClientBrowserCreated", browser,
 	function()
 		loadBrowserURL( source, link )
         outputDebugString( "Loading weblink notify!")
-        outputDebugString( "Nnotify startup!")
+        outputDebugString( "Notify startup!")
         addEventHandler( "onClientRender", root, browserRender )
 	end
 )

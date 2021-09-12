@@ -22,9 +22,13 @@
 	function setPlayerChannel ( player, id )
 		if not checkValidPlayer ( player ) then return false end
 		id = tonumber(id)
-		if not id then
+        if not id then
+            print("Voice - Triggo Voz Padrão")
+            print("Canal q tava: "..playerChannels[player])
+            channels[tonumber(playerChannels[player])][player] = nil
 			return setPlayerDefaultChannel ( player )
-		end
+        end
+        print("Voice - Alterando Para O Canal: "..id)
 		local previousChannel = playerChannels[player]
 		--Remove them from any previous channels
 		if tonumber(previousChannel) then
@@ -40,7 +44,7 @@
 		channels[id][player] = true
 		--Update all players in this channel of the new player in this channel
 		playersInChannel = getPlayersInChannel ( id )
-		for i,v in ipairs(playersInChannel) do
+		for i, v in ipairs(playersInChannel) do
 			setPlayerVoiceBroadcastTo ( v, playersInChannel )
 		end
 		return true

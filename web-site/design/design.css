@@ -1,0 +1,51 @@
+body {
+    margin: auto;
+    padding: auto;
+    overflow: hidden;
+}
+
+html {
+    background: url('./images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.box {
+    position: relative;
+    margin-top: 15%;
+    align-items: center;
+    text-align: center;
+}
+
+.box .gang {
+    width: 100px;
+    height: 100px;
+    margin-left: 5%;
+    transition: 0.6s;
+}
+
+.box .gang:hover {
+    transform: scale(1.1);
+}
+
+.box .pvp {
+    width: 100px;
+    height: 100px;
+    transition: 0.6s;
+}
+
+.box .pvp:hover {
+    transform: scale(1.1);
+}
+
+.devMode {
+    margin-left: 5%;
+    font-family: hamberger;
+    color: white;
+}
+
+/*Fonts*/
+
+@font-face {
+    font-family: hamberger;
+    src: url('./fonts/hamberger.ttf');
+}

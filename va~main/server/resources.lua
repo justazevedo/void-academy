@@ -8,7 +8,7 @@ function startResources( )
         else
             setTimer( function( )
                 local resource = getResourceFromName( "va~".. resourceName )
-                outputDebugString( "starting resource NAME: ".. getResourceName( resource ) .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) ..", VERSION: ".. getResourceInfo( resource, "version" ) )
+                outputDebugString( "starting resource NAME: ".. getResourceName( resource ) or "Unknown" .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) or "Unknown" ..", VERSION: ".. getResourceInfo( resource, "version" ) or "0.0.0" )
                 startResource( resource )
             end, 5000, 1 )
         end

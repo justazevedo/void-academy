@@ -1,9 +1,48 @@
-﻿function useItem(DBID, itemSlot, itemID, itemValue, itemCount, itemType )
+﻿function useItem( DBID, itemSlot, itemID, itemValue, itemCount, itemType )
 	if itemID == 1 then
 		exports["va~radio"]:toggleRadio()
+	elseif itemID == 108 then
+		triggerServerEvent( 'va.energy_can', localPlayer, localPlayer )
+		checkItemToTake( 108, itemSlot )
 	end
 	if getItemType( itemID ) == 'weapon' then
 		triggerServerEvent( "va.setWeapon", localPlayer, localPlayer, itemSlot, itemID )
+	end
+end
+
+function drink_energy()
+	if not isTimer( energy_drink ) then
+		setGameSpeed( 1.1 )
+		energy_drink = setTimer( energy_drink, 1000, 0 )
+	else
+		setGameSpeed( 1.1 )
+	end
+end
+addEvent( "va.drink_energy", true )
+addEventHandler( "va.drink_energy", root, drink_energy )	
+
+function energy_drink()
+	local energy = getElementData( localPlayer, "va.energy" )
+	if energy > 0 then
+		setElementData( localPlayer, "va.energy", energy - math.random( 1, 4 ) )
+	else
+		setElementData( localPlayer, "va.energy", 0 )
+		setGameSpeed( 1 )
+		if isTimer( energy_drink ) then
+			killTimer( energy_drink )
+		end
+	end
+end
+
+function checkItemToTake( itemID, slot )
+	local count = 0
+	if tonumber(itemTable[getItemType(itemID)][slot]['count'] or 0) > 1 then
+		count = tonumber(itemTable[getItemType(itemID)][slot]['count']) - 1
+		triggerServerEvent("va.setSlotCount", getLocalPlayer(), getLocalPlayer(), getItemType(itemID), slot, itemTable[getItemType(itemID)][slot]['value'] or 0, itemTable[getItemType(itemID)][slot]['count'] or 0, itemTable[getItemType(itemID)][slot]['duty'] or 0, itemTable[getItemType(itemID)][slot]['actionSlot'] or 0, itemID)
+		setSlotCount(slot, count, itemID, itemTable[getItemType(itemID)][slot]['duty'] or 0)
+	else
+		itemTable[getItemType(itemID)][slot] = {-1,-1,-1,-1}
+		triggerServerEvent("va.deleteItem", getLocalPlayer(), getLocalPlayer(), getItemType(itemID), slot)
 	end
 end
 

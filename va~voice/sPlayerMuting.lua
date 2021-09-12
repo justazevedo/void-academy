@@ -64,5 +64,3 @@ function isPlayerMuted ( player )			return isPlayerVoiceMuted ( player ) end
 function setPlayerMuted ( player, muted )	return setPlayerVoiceMuted ( player, muted ) end
 function getPlayerMutedByList ( player )	return getPlayerVoiceMutedByList ( player ) end
 -- DO NOT USE THESE AS THEY WILL BE REMOVED IN A LITTLE WHILE --
-
-

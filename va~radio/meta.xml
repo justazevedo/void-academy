@@ -12,5 +12,7 @@
     <file src="nui/scripts.js"/>
 
     <export function="toggleRadio" type="client"/>
+    <export function="setChannel" type="server"/>
+    <export function="removeChannel" type="server"/>
 
 </meta>

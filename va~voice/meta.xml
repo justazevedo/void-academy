@@ -1,20 +1,12 @@
 <meta>
-    <info author="Talidan + Fenix. 3D Edit: Vazern Scripting (Facebook)" description="A handler resource to account for common uses for voice support" type="utility" version="1.1.0" />
 	<!--Client -->
-	<script src="cGlobals.lua" type="client" />
-	<script src="cDrawIcon.lua" type="client" />
-	<script src="cPlayerMuting.lua" type="client" />
+	<script src="cGlobals.lua" type="client" cache="false"/>
+	<script src="cDrawIcon.lua" type="client" cache="false"/>
+	<script src="cPlayerMuting.lua" type="client" cache="false"/>
 	
 	<export function="setPlayerVoiceMuted" type="client" />
 	<export function="isPlayerVoiceMuted" type="client" />
-
-	<file src="audio/start.wav" />
-	<file src="images/voice.png" />
-	<file src="images/voice_small.png" />
-	<file src="images/voice_small_muted.png" />
 	
-
-
 	<!--Server -->
 	<script src="sGlobals.lua" type="server" />
 	<script src="sDefaultChannelManager.lua" type="server" />
@@ -36,7 +28,6 @@
 	</settings>
 
 
-	<export function="toggleRadio" type="client" />
 	<!-- Exported functions for backward compatibility only -->
 	<!-- DO NOT USE THESE AS THEY WILL BE REMOVED IN A LITTLE WHILE -->
 	<export function="setPlayerMuted" type="client" />
@@ -44,9 +35,12 @@
 	<export function="setPlayerMuted" type="server" />
 	<export function="isPlayerMuted" type="server" />
 	<export function="getPlayerMutedByList" type="server" />
+	
+	<file src="audio/voice.wav" />
+	<file src="audio/offline.mp3" />
+	<file src="audio/startup.mp3" />
+
+	<oop>true</oop>
+	
 	<!-- DO NOT USE THESE AS THEY WILL BE REMOVED IN A LITTLE WHILE -->
-	
-	
-	
-	
 </meta>

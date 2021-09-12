@@ -3,7 +3,7 @@ local xmlCache = {}
 
 local VOICE_IDLE = {
 	type = "image",
-	src = ":voice/images/voice_small.png",
+	src = ":imagesRS/other/voice.png",
 	color = tocolor(255,255,255,64),
 	width = 20,
 	height = 20,
@@ -11,7 +11,7 @@ local VOICE_IDLE = {
 
 local VOICE_CHATTING = {
 	type = "image",
-	src = ":voice/images/voice_small.png",
+	src = ":imagesRS/other/voice.png",
 	color = tocolor(255,255,255,255),
 	width = 20,
 	height = 20,
@@ -19,7 +19,7 @@ local VOICE_CHATTING = {
 
 local VOICE_MUTED = {
 	type = "image",
-	src = ":voice/images/voice_small_muted.png",
+	src = ":imagesRS/other/voice_muted.png",
 	color = tocolor(255,255,255,255),
 	width = 20,
 	height = 20,

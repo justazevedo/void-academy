@@ -17,9 +17,11 @@
     <file src="nui/images/rifas.png"/>
     <file src="nui/images/vagos.png"/>
     <file src="nui/css.css"/>
+    <file src="nui/font.ttf"/>
     <file src="nui/jquery-1.11.3.min.js"/>
     <file src="nui/jquery.js"/>
     <file src="nui/nui.html"/>
+    <file src="nui/players.ttf"/>
 
     <export function="showGroups" type="client"/>
     <export function="closeGroups" type="client"/>

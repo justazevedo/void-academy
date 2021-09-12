@@ -1,8 +1,9 @@
+
 local g_screenX,g_screenY = guiGetScreenSize()
 local BONE_ID = 8
 local WORLD_OFFSET = 0.4
 local ICON_PATH = "images/voice.png"
-local ICON_WIDTH = 0.35*g_screenX
+local ICON_WIDTH = 0.25*g_screenX
 -- local ICON_HEIGHT = 0.213333333333*g_screenY
 --
 local iconHalfWidth = ICON_WIDTH/2
@@ -10,16 +11,17 @@ local iconHalfWidth = ICON_WIDTH/2
 
 local ICON_DIMENSIONS = 16
 local ICON_LINE = 20
-local ICON_TEXT_SHADOW = tocolor ( 0, 0, 0, 255 )
+local ICON_TEXT_SHADOW = tocolor ( 255, 255, 255, 155 )
 
+--[[
 --Draw the voice image
 addEventHandler ( "onClientRender", root,
 	function()
 		local index = 0
 		if not bShowChatIcons then return end
 		for player in pairs(voicePlayers) do
-			local color = tocolor(255, 255, 255)
-			dxDrawVoiceLabel ( player, index, color )
+			--local color = tocolor(getPlayerNametagColor ( player ))
+			--dxDrawVoiceLabel ( player, index, color )
 			index = index + 1
 			while true do
 				--is he streamed in?
@@ -42,7 +44,7 @@ addEventHandler ( "onClientRender", root,
 				if not isLineOfSightClear ( camX, camY, camZ, headX, headY, headZ, true, false, false, true, false, true, false, player ) then
 					break
 				end
-				dxDrawVoice ( absX, absY - 2, color, getDistanceBetweenPoints3D(camX, camY, camZ, headX, headY, headZ) )
+				dxDrawVoice ( absX, absY, color, getDistanceBetweenPoints3D(camX, camY, camZ, headX, headY, headZ) )
 				break
 			end
 		end
@@ -51,22 +53,27 @@ addEventHandler ( "onClientRender", root,
 
 function dxDrawVoice ( posX, posY, color, distance )
 	distance = 1/distance
-	--dxDrawImage ( posX - iconHalfWidth*distance, posY - iconHalfWidth*distance, ICON_WIDTH*distance, ICON_WIDTH*distance, ICON_PATH, 0, 0, 0, tocolor(255, 255, 255, 195), false )
+	dxDrawImage ( posX - iconHalfWidth*distance, posY - iconHalfWidth*distance, ICON_WIDTH*distance, ICON_WIDTH*distance, ICON_PATH, 0, 0, 0, color, false )
 end
 
+
+
 function dxDrawVoiceLabel ( player, index, color )
+if localPlayer ~= player then
 	local sx, sy = guiGetScreenSize ()
 	local scale = sy / 800
 	local spacing = ( ICON_LINE * scale )
 	local px, py = sx - 200, sy * 0.7 + spacing * index
 	local icon = ICON_DIMENSIONS * scale
 
----	dxDrawImage ( px, py, icon, icon, ICON_PATH, 0, 0, 0, tocolor(255, 255, 255, 195), false )
+	--dxDrawImage ( px, py, icon, icon, ICON_PATH, 0, 0, 0, color, false )
 
 	px = px + spacing
 
-
+	-- shadows
+	--dxDrawText ( getPlayerName ( player ):gsub('#%x%x%x%x%x%x', ''), px + 1, py + 1, px, py, ICON_TEXT_SHADOW, scale )
 	-- text
-	--dxDrawText ( getPlayerName ( player ), px, py, px, py, tocolor(255, 255, 255, 195), 1.00, "default-bold", "left", "top", false, false, false, true, false)
+	--dxDrawText ( getPlayerName ( player ):gsub('#%x%x%x%x%x%x', ''), px, py, px, py, color, scale )
 end
-
+end
+]]--

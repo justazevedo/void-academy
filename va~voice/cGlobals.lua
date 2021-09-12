@@ -4,56 +4,56 @@ bShowChatIcons = true
 voicePlayers = {}
 globalMuted = {}
 
-falandoRadio = {}
-falandoRadioP = false
+---
+--[[
+addEventHandler ( "onClientPlayerVoiceStart", root,
+	function()
+		if isPlayerVoiceMuted ( source ) then
+			cancelEvent()
+			return
+		end
+		voicePlayers[source] = true
+	end
+)]]--
+
+local range = 5
 
 addEventHandler ( "onClientPlayerVoiceStart", root, 
 function() 
     if (source and isElement(source) and getElementType(source) == "player") and localPlayer ~= source then 
+
+		if getElementData(source, "inCall") == true then 
+		voicePlayers[source] = true 
+		
+		else
+	
         local sX, sY, sZ = getElementPosition(localPlayer) 
         local rX, rY, rZ = getElementPosition(source) 
         local distance = getDistanceBetweenPoints3D(sX, sY, sZ, rX, rY, rZ) 
-        if distance <= 4 then 
+        if distance <= range then 
             voicePlayers[source] = true 
-		elseif falandoRadio[source] and getElementData( localPlayer,"va.frequencyR" ) == getElementData( source,"va.frequencyR" ) then
-			if getElementData( localPlayer,"va.frequencyR" ) == nil or getElementData( source,"va.frequencyR" ) == nil then
-				if not getElementData( source, "va.radioLiberado") then
-					cancelEvent()
-					return
-				end
-			end
-			if not sound then
-			local sound = playSound("audio/start.wav")
-			setSoundVolume(sound, 0.1)
-			end 
-			voicePlayers[source] = true
-		else 
-			cancelEvent()--This was the shit 
-		end 
-    end 
-end 
-)
-
-addEvent("toggleRadioForPlayer", true)
-addEventHandler ( "toggleRadioForPlayer", root,
-    function()
-        if falandoRadio[source] then
-            falandoRadio[source] = nil
-        else
-		    table.insert( falandoRadio, source )
-		    falandoRadio[source] = true
+        else 
+            cancelEvent()
+        end 
 		end
-    end
-)
+    end 
+end     
+) 
 
-function toggleRadio( )
-	triggerServerEvent( "onClientToggleRadio", localPlayer )
-	falandoRadioP = not falandoRadioP
-	if falandoRadioP then
-		print( 'speak in radio' )
-	else
-	end
+
+--[[
+addEventHandler("onClientPreRender", root,
+    function ()
+       local players = getElementsByType("player", root, true) -- table of sounds which will be transformed into 3D
+	   for k, v in ipairs(players) do 
+	   if getElementData(v, "inCall") == false then 
+		setSoundVolume(v, 10)
+		setSoundPan(v, 0)
+		end
+		end
 end
+, false)
+]]--
 
 addEventHandler ( "onClientPlayerVoiceStop", root,
 	function()
@@ -77,9 +77,9 @@ function checkValidPlayer ( player )
 end
 
 ---
-
+--[[
 setTimer ( 
 	function()
 		bShowChatIcons = getElementData ( resourceRoot, "show_chat_icon", show_chat_icon )
 	end,
-SETTINGS_REFRESH, 0 )
+SETTINGS_REFRESH, 0 )]]--

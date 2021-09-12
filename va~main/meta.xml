@@ -4,10 +4,15 @@
     <script src="shared/general.lua" type="shared"/>
     <script src="shared/player.lua" type="shared"/>
 
+    <script src="client/models.lua" type="client"/>
+
     <script src="server/discord.lua" type="server"/>
     <script src="server/resources.lua" type="server"/>
     <script src="server/save.lua" type="server"/>
     <script src="server/player.lua" type="server"/>
+
+    <file src="models/energy_can.dff"/>
+    <file src="models/energy_can.txd"/>
 
     <export function="spawn" type="server"/>
     <export function="getServerIP" type="server"/>

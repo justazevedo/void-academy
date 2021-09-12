@@ -18,21 +18,35 @@ function isEventHandlerAdded( sEventName, pElementAttachedTo, func )
     return false
 end
 
-voice = 0
+local voice = 0
 
 function browserRender()
     if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
-        if getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
-            dxDrawText("Frequencia: #fff000".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8516, screenH * 0.9861, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        if getElementData( localPlayer, "va.radioLiberado" ) and voice == 1 then
+            dxDrawText("Frequencia: #fff000".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        elseif not getElementData( localPlayer, "va.radioLiberado" ) and voice == 1 then
+            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8580, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+            dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        elseif not getElementData( localPlayer, "va.radioLiberado" ) and voice == 0 then
+            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        elseif getElementData( localPlayer, "va.radioLiberado" ) then
+            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+        end
+    else
+        if voice == 1 then
+            dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
         else
-            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8516, screenH * 0.9861, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
         end
     end
-    if not getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
-        dxDrawText("Voice: #fff000Ativado", screenW * 0.9115, screenH * 0.9861, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+    --[[if not getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
+        dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
     else
-        dxDrawText("Voice: Desativado", screenW * 0.9050, screenH * 0.9861, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-    end
+        dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
+    end]]
     dxDrawImage( 0, 0, screenW, screenH, browser, 0, 0, 0, tocolor(255, 255, 255, 255) )
 end
 
@@ -87,11 +101,13 @@ function setInterface( value )
             statsPlayer = setTimer( playerStats, 100, 0 )
         end
         setElementData( localPlayer, "va.actionbar", true )
+        showChat( true )
     else
         if isTimer( statsPlayer ) then
             killTimer( statsPlayer )
         end
         setElementData( localPlayer, "va.actionbar", false )
+        showChat( false )
         executeBrowserJavascript( browser, "window.postMessage( { health: 0, armour : 0, opacity : 0 }, '*' )" )
         setTimer( function( )
             if isEventHandlerAdded( 'onClientRender', root, browserRender ) then

@@ -58,20 +58,3 @@ function outputVoiceNotLoaded ()
 	outputDebugString ( "Voice is not enabled on this server!", 1 )
 	return false
 end
-
-local radioEnabled = {}
-
-addEvent("onClientToggleRadio", true)
-addEventHandler ( "onClientToggleRadio", root,
-    function()
-        if radioEnabled[source] then
-            table.insert(radioEnabled, source)
-        else
-            radioEnabled[source] = nil
-        end
-        
-        for _,v in ipairs(getElementsByType("player")) do
-            triggerClientEvent ( v, "toggleRadioForPlayer", source )
-        end
-    end
-)

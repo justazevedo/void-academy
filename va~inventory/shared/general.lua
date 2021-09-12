@@ -125,6 +125,7 @@ itemLists = {
 
 	{name = "Bolsa", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --106
 	{name = "Bolsa premium", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --107
+	{name = "Monster Energy", desc="Use para ficar bem mais rapido.", weight=0.02, stack = true, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --108
 
 }
 

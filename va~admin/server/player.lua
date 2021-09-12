@@ -36,7 +36,7 @@ function adminDuty( player, commandName )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.adminDuty[1], adminDuty )
+addCommandHandler( commandsAdmin.adminDuty["commandName"], adminDuty )
 
 function banPlayer( player, commandName, id, timeBan, reasonBan )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 3 ) then
@@ -56,7 +56,7 @@ function banPlayer( player, commandName, id, timeBan, reasonBan )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.banPlayer[1], banPlayer )
+addCommandHandler( commandsAdmin.banPlayer["commandName"], banPlayer )
 
 function godPlayer( player, commandName, id )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
@@ -67,7 +67,7 @@ function godPlayer( player, commandName, id )
                 setElementHealth( targetPlayer, 100 )
                 setPedArmor( targetPlayer, 100 )
                 exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** usou o **/".. commandName .."** no jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
-                exports["va~notify"]:createNotifyS( player, "info", "O administrador ".. getPlayerName( player ) .." usou o /".. commandName .." em você." )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "O administrador ".. getPlayerName( player ) .." usou o /".. commandName .." em você." )
                 exports["va~notify"]:createNotifyS( player, "success", "Você usou o /".. commandName .." no jogador ".. getPlayerName( targetPlayer ) .."." )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
@@ -81,7 +81,7 @@ function godPlayer( player, commandName, id )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.godPlayer[1], godPlayer )
+addCommandHandler( commandsAdmin.godPlayer["commandName"], godPlayer )
 
 function setHealth( player, commandName, id, health )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
@@ -92,7 +92,7 @@ function setHealth( player, commandName, id, health )
             if targetPlayer then
                 setElementHealth( targetPlayer, health )
                 exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou a vida do jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** para **".. health .."%**", 'Desenvolvido por azarado bugs' )
-                exports["va~notify"]:createNotifyS( player, "info", "Sua vida foi setada para ".. health .."%, pelo administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Sua vida foi setada para ".. health .."%, pelo administrador ".. getPlayerName( player ) .."." )
                 exports["va~notify"]:createNotifyS( player, "success", "Você setou a vida do jogador ".. getPlayerName( targetPlayer ) ..", ".. health .."%." )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
@@ -104,7 +104,7 @@ function setHealth( player, commandName, id, health )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.sethealth[1], setHealth )
+addCommandHandler( commandsAdmin.sethealth["commandName"], setHealth )
 
 function setArmor( player, commandName, id, armor )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
@@ -115,7 +115,7 @@ function setArmor( player, commandName, id, armor )
             if targetPlayer then
                 setPedArmor( targetPlayer, armor )
                 exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou o colete do jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** para **".. armor .."%**", 'Desenvolvido por azarado bugs' )
-                exports["va~notify"]:createNotifyS( player, "info", "Seu colete foi setada para ".. armor .."%, pelo administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Seu colete foi setada para ".. armor .."%, pelo administrador ".. getPlayerName( player ) .."." )
                 exports["va~notify"]:createNotifyS( player, "success", "Você setou o colete do jogador ".. getPlayerName( targetPlayer ) ..", ".. armor .."%." )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
@@ -127,7 +127,7 @@ function setArmor( player, commandName, id, armor )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.setarmor[1], setArmor )
+addCommandHandler( commandsAdmin.setarmor["commandName"], setArmor )
 
 function setAdmin( player, commandName, id, adminlevel )
     id = tonumber( id )
@@ -139,7 +139,7 @@ function setAdmin( player, commandName, id, adminlevel )
             if targetPlayer then
                 setElementData( targetPlayer, "va.adminlevel", adminlevel )
                 exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou o level admin do jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** para **".. adminlevel .."**", 'Desenvolvido por azarado bugs' )
-                exports["va~notify"]:createNotifyS( player, "info", "Você foi setado de adminLevel: ".. adminlevel .." pelo administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi setado de adminLevel: ".. adminlevel .." pelo administrador ".. getPlayerName( player ) .."." )
                 exports["va~notify"]:createNotifyS( player, "success", "Você setou o jogador ".. getPlayerName( targetPlayer ) .." como adminLevel: ".. adminlevel .."." )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
@@ -151,7 +151,7 @@ function setAdmin( player, commandName, id, adminlevel )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.setadmin[1], setAdmin )
+addCommandHandler( commandsAdmin.setadmin["commandName"], setAdmin )
 
 function givePlayerItem( player, commandName, id, itemID, amountItem )
     id = tonumber( id )
@@ -175,7 +175,7 @@ function givePlayerItem( player, commandName, id, itemID, amountItem )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.giveitem[1], givePlayerItem )
+addCommandHandler( commandsAdmin.giveitem["commandName"], givePlayerItem )
 
 function showPlayerInventory( player, commandName, id )
     id = tonumber( id )
@@ -194,7 +194,7 @@ function showPlayerInventory( player, commandName, id )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.verinv[1], showPlayerInventory )
+addCommandHandler( commandsAdmin.verinv["commandName"], showPlayerInventory )
 
 function noClip( player, commandName )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
@@ -221,4 +221,4 @@ function noClip( player, commandName )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.noclip[1], noClip )
+addCommandHandler( commandsAdmin.noclip["commandName"], noClip )

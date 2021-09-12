@@ -2,11 +2,17 @@
     <info author="azarado" name="Admin System (AS)" version="1.0.0"/>
 
     <script src="shared/general.lua" type="shared"/>
-    
+        
     <script src="client/player.lua" type="client"/>
+    <script src="client/list.lua" type="client"/>
 
     <script src="server/player.lua" type="server"/>
     <script src="server/vehicle.lua" type="server"/>
     <script src="server/resource.lua" type="server"/>
+
+    <file src="html/index.html"/>
+    <file src="html/jquery-1.11.3.min.js"/>
+    <file src="html/script.js"/>
+    <file src="html/style.css"/>
 
 </meta>
