@@ -1,15 +1,15 @@
 <meta>
     <info author="azarado" name="Main System (MS)" version="1.0.0"/>
 
-    <script src="shared/general.lua" type="shared"/>
-    <script src="shared/player.lua" type="shared"/>
+    <script src="shared/general.lua" type="shared" cache="false"/>
+    <script src="shared/player.lua" type="shared" cache="false"/>
 
-    <script src="client/models.lua" type="client"/>
+    <script src="client/models.lua" type="client" cache="false"/>
 
-    <script src="server/discord.lua" type="server"/>
-    <script src="server/resources.lua" type="server"/>
-    <script src="server/save.lua" type="server"/>
-    <script src="server/player.lua" type="server"/>
+    <script src="server/discord.lua" type="server" cache="false"/>
+    <script src="server/resources.lua" type="server" cache="false"/>
+    <script src="server/save.lua" type="server" cache="false"/>
+    <script src="server/player.lua" type="server" cache="false"/>
 
     <file src="models/energy_can.dff"/>
     <file src="models/energy_can.txd"/>

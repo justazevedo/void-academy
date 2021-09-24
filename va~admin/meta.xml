@@ -1,14 +1,14 @@
 <meta>
     <info author="azarado" name="Admin System (AS)" version="1.0.0"/>
 
-    <script src="shared/general.lua" type="shared"/>
+    <script src="shared/general.lua" type="shared" cache="false"/>
         
-    <script src="client/player.lua" type="client"/>
-    <script src="client/list.lua" type="client"/>
+    <script src="client/player.lua" type="client" cache="false"/>
+    <script src="client/list.lua" type="client" cache="false"/>
 
-    <script src="server/player.lua" type="server"/>
-    <script src="server/vehicle.lua" type="server"/>
-    <script src="server/resource.lua" type="server"/>
+    <script src="server/player.lua" type="server" cache="false"/>
+    <script src="server/vehicle.lua" type="server" cache="false"/>
+    <script src="server/resource.lua" type="server" cache="false"/>
 
     <file src="html/index.html"/>
     <file src="html/jquery-1.11.3.min.js"/>

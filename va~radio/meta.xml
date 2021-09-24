@@ -1,9 +1,9 @@
 <meta>
     <info author="azarado" name="Radio System (RS)" version="1.0.0"/>
 
-    <script src="va_client.lua" type="client"/>
-    <script src="va_server.lua" type="server"/>
-    <script src="resource.lua" type="server"/>
+    <script src="va_client.lua" type="client" cache="false"/>
+    <script src="va_server.lua" type="server" cache="false"/>
+    <script src="resource.lua" type="server" cache="false"/>
 
     <file src="nui/images/clock.ttf"/>
     <file src="nui/images/radio.png"/>

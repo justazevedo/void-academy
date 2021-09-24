@@ -3,13 +3,13 @@
 
     <file src="fx/tex_replace.fx"/>
 
-    <script src="shared/general.lua" type="shared"/>
+    <script src="shared/general.lua" type="shared" cache="false"/>
 
-    <script src="client/main.lua" type="client"/>
-    <script src="client/models.lua" type="client"/>
+    <script src="client/main.lua" type="client" cache="false"/>
+    <script src="client/models.lua" type="client" cache="false"/>
     
-    <script src="server/main.lua" type="server"/>
-    <script src="server/resource.lua" type="server"/>
+    <script src="server/main.lua" type="server" cache="false"/>
+    <script src="server/resource.lua" type="server" cache="false"/>
 
     <file src="skins/ak_flamengo.jpg"/>
     <file src="skins/awp_flamengo.jpg"/>

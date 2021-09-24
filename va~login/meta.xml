@@ -1,9 +1,9 @@
 <meta>
     <info author="azarado" name="Login System (LS)" version="1.0.0"/>
 
-    <script src="voidacademy_client.lua" type="client"/>
-    <script src="voidacademy_server.lua" type="server"/>
-    <script src="resource.lua" type="server"/>
+    <script src="voidacademy_client.lua" type="client" cache="false"/>
+    <script src="voidacademy_server.lua" type="server" cache="false"/>
+    <script src="resource.lua" type="server" cache="false"/>
 
     <file src="nui/css.css"/>
     <file src="nui/jquery-1.11.3.min.js"/>

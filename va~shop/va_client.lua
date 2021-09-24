@@ -23,7 +23,7 @@ function toggleShop()
         end, 500, 1 )
         showCursor( true )
         for index, value in ipairs( items ) do
-            executeBrowserJavascript( nui, "window.postMessage( { name : '".. value['name'] .."', description : '".. value['description'] .."', price : ".. value['price'] ..", itemImg : ".. value['itemImg'] ..", itemID : ".. value['itemID'] ..", close : false }, '*' )" )
+            executeBrowserJavascript( nui, "window.postMessage( { name : '".. value['name'] .."', description : '".. value['description'] .."', price : ".. value['price'] ..", itemImg : ".. value['itemID'] ..", itemID : ".. value['itemID'] ..", close : false }, '*' )" )
         end
     end
 end
