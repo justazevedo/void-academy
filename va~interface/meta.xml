@@ -10,6 +10,8 @@
     <file src="nui/jquery-1.11.3.min.js" />
     <file src="nui/jquery.js" />
     <file src="nui/nui.html" />
+    <file src="nui/fonts/Hype.ttf"/>
+    <file src="nui/fonts/Tomorrow-Medium.ttf"/>
     <file src="nui/images/bulletproof-vest.png" />
     <file src="nui/images/death--v1.png" />
     <file src="nui/images/energy-drink.png" />

@@ -2,7 +2,7 @@
 
 function energy_can( player )
     if tonumber( getElementData( player, "va.energy" ) or 0 ) > 0 then
-        return exports["va~notify"]:createNotifyS( player, "error", "Você já está com o efeito do energético." )
+        return --exports["va~notify"]:createNotifyS( player, "error", "Você já está com o efeito do energético." )
     else
         local playerX, playerY, playerZ = getElementPosition( player )
         local energy_can = createObject( 2647, playerX, playerY, playerZ )

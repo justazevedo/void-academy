@@ -21,32 +21,6 @@ end
 local voice = 0
 
 function browserRender()
-    if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
-        if getElementData( localPlayer, "va.radioLiberado" ) and voice == 1 then
-            dxDrawText("Frequencia: #fff000".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        elseif not getElementData( localPlayer, "va.radioLiberado" ) and voice == 1 then
-            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8580, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-            dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        elseif not getElementData( localPlayer, "va.radioLiberado" ) and voice == 0 then
-            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        elseif getElementData( localPlayer, "va.radioLiberado" ) then
-            dxDrawText("Frequencia: ".. getElementData( localPlayer, "va.frequencyR" ) .."MHz", screenW * 0.8470, screenH * 0.9879, screenW * 0.9089, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        end
-    else
-        if voice == 1 then
-            dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        else
-            dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-        end
-    end
-    --[[if not getElementData( localPlayer, "va.radioLiberado") and voice == 1 then
-        dxDrawText("Voice: #fff000Ativado", screenW * 0.9170, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-    else
-        dxDrawText("Voice: Desativado", screenW * 0.9060, screenH * 0.9879, screenW * 0.9531, screenH * 1.0000, tocolor(155, 155, 155, 255), 1.00, "default", "left", "top", false, false, false, true, false)
-    end]]
     dxDrawImage( 0, 0, screenW, screenH, browser, 0, 0, 0, tocolor(255, 255, 255, 255) )
 end
 
@@ -83,14 +57,29 @@ function playerStats( )
     local money = getPlayerMoney( localPlayer )
     local weapon = getPedWeapon( localPlayer )
     local energy = getElementData( localPlayer, "va.energy" ) or 0
+    local tRadio = tostring( getElementData( localPlayer, "va.radioLiberado" ) or false )
+    local frequency = getElementData( localPlayer, "va.frequencyR" ) or 0
+    local voiceRange = getElementData( localPlayer, "va.rangeVoice" )
     local clips = getPedAmmoInClip( localPlayer )
     if ( weapon ) then
         weaponInHand = clips
     else
         weaponInHand = false
     end
-    executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", energy : ".. energy ..", ammo : ".. weaponInHand ..", money : ".. money ..", opacity : 1 }, '*' )" )
+    executeBrowserJavascript( browser, "window.postMessage( { health: ".. health ..", armour : ".. armour ..", energy : ".. energy ..", voice : '".. voiceRange .."', frequency : ".. frequency ..", talking : ".. voice ..", talkingRadio : ".. tRadio ..", ammo : ".. weaponInHand ..", money : ".. money ..", opacity : 1 }, '*' )" )
 end
+
+function changeMode()
+    local voiceRange = getElementData( localPlayer, "va.rangeVoice" )
+    if voiceRange == "Falando" then
+       setElementData( localPlayer, "va.rangeVoice", "Gritando" )
+    elseif voiceRange == "Gritando" then
+        setElementData( localPlayer, "va.rangeVoice", "Susurrando" )
+    elseif voiceRange == "Susurrando" then
+        setElementData( localPlayer, "va.rangeVoice", "Falando" )
+    end
+end
+addCommandHandler( 'Mudar modo de falar', changeMode )
 
 function setInterface( value )
     if value then

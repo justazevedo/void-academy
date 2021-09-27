@@ -26,14 +26,8 @@ function playerID( thePreviousAccount, theCurrentAccount, autologin )
 end
 addEventHandler( "onPlayerLogin", getRootElement( ), playerID )
 
-function playerDamage( attacker, weapon, bodypart, loss )
-    if getElementData( source, "va.onDuty" ) then
-        cancelEvent()
-    end
-end
-
 for index, teams in ipairs( getElementsByType( "team" ) ) do
-    if ( getTeamFriendlyFire( teams ) == true ) then
-        setTeamFriendlyFire( teams, false )
+    if ( getTeamFriendlyFire( teams ) == false ) then
+        setTeamFriendlyFire( teams, true )
     end
 end

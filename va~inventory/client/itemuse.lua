@@ -2,8 +2,13 @@
 	if itemID == 1 then
 		exports["va~radio"]:toggleRadio()
 	elseif itemID == 108 then
-		triggerServerEvent( 'va.energy_can', localPlayer, localPlayer )
-		checkItemToTake( 108, itemSlot )
+		local energy = getElementData( localPlayer, "va.energy" ) or 0
+		if energy > 0 then
+			return exports["va~notify"]:createNotify( player, "error", "Você já está com o efeito do energético." )
+		else
+			triggerServerEvent( 'va.energy_can', localPlayer, localPlayer )
+			checkItemToTake( 108, itemSlot )
+		end
 	end
 	if getItemType( itemID ) == 'weapon' then
 		triggerServerEvent( "va.setWeapon", localPlayer, localPlayer, itemSlot, itemID )
@@ -11,9 +16,9 @@
 end
 
 function drink_energy()
-	if not isTimer( energy_drink ) then
+	if not isTimer( energy_timer ) then
 		setGameSpeed( 1.1 )
-		energy_drink = setTimer( energy_drink, 1000, 0 )
+		energy_timer = setTimer( energy_drink, 1000, 0 )
 	else
 		setGameSpeed( 1.1 )
 	end
@@ -28,8 +33,8 @@ function energy_drink()
 	else
 		setElementData( localPlayer, "va.energy", 0 )
 		setGameSpeed( 1 )
-		if isTimer( energy_drink ) then
-			killTimer( energy_drink )
+		if isTimer( energy_timer ) then
+			killTimer( energy_timer )
 		end
 	end
 end

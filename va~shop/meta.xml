@@ -1,9 +1,10 @@
 <meta>
     <info author="azarado" name="Shop System (SS)" version="1.0.0"/>
 
-    <script src="va_general.lua" type="shared"/>
-    <script src="va_client.lua" type="client"/>
-    <script src="va_server.lua" type="server"/>
+    <script src="va_general.lua" type="shared" cache="false"/>
+    <script src="va_client.lua" type="client" cache="false"/>
+    <script src="va_server.lua" type="server" cache="false"/>
+    <script src="resource.lua" type="server"/>
 
     <file src="nui/index.html"/>
     <file src="nui/jquery-1.11.3.min.js"/>

@@ -6,6 +6,19 @@ body {
   background: transparent !important;
 }
 
+::-webkit-scrollbar-track {
+  background-color: #F4F4F4;
+  border-radius: 8px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 8px;
+  background: #F4F4F4;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #ff9100;
+}
 
 @font-face {
   font-family: mainFont;
@@ -189,6 +202,12 @@ div .Grove_Street {
   background-repeat: no-repeat;
 }
 
+.Pedreiros {
+  background: rgba(255, 126, 14, 0.418) url('./images/pedreiros.png');
+  background-size: 70% 80%;
+  background-position-x: 50%;
+  background-repeat: no-repeat;
+}
 
 
 @media screen and (min-width: 1920px) {
@@ -210,4 +229,10 @@ div .Grove_Street {
   .group2 {
     margin-top: 1%;
   } 
+}
+
+@media screen and (max-width: 1366px) {
+  .groups {
+    left: 18%;
+  }  
 }

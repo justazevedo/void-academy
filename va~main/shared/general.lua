@@ -3,14 +3,19 @@ discordPontos = "https://discord.com/api/webhooks/881379953348853781/_Hu-De1HAa-
 
 listResources = {
     'main',
+    'admin',
+    'bone_attach',
+    'freecam',
+    'groups',
     'interface',
+    'inventory',
     'login',
     'notify',
-    'freecam',
-    'admin',
-    'inventory',
-    'groups',
-    'weapons',
+    'radio',
+    'shop',
     'voice',
-    'radio'
+    'weapons',
 }
+
+bindKeyStartRadio = 'capslock'
+bindKeyStartChangeRange = 'x'

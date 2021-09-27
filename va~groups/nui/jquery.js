@@ -91,4 +91,5 @@ const setSkin = ( id ) => {
 
 const selectedSkin = () => {
     mta.triggerEvent( 'va.selectedSkin', gangsID, skinSelected )
+    backSkin()
 }

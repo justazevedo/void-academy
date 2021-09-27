@@ -38,14 +38,20 @@ function adminDuty( player, commandName )
 end
 addCommandHandler( commandsAdmin.adminDuty["commandName"], adminDuty )
 
-function banPlayer( player, commandName, id, timeBan, reasonBan )
+function gBan( player, commandName, id, timeBan, ... )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 3 ) then
         id = tonumber( id )
         timeBan = tonumber( timeBan )
         if id and timeBan then
+            local reasonBan = table.concat( { ... }, " " )
             local targetPlayer = exports["va~main"]:getPlayerID( id )
             if targetPlayer then
-                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** baniu o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** pelo motivo **".. reason or "Undefined" .."**", 'Desenvolvido por azarado bugs' )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você banido!" )
+                exports["va~notify"]:createNotifyS( player, "success", "Você baniu o jogador ".. getPlayerName( targetPlayer ) .." ID:".. id .."." )
+                setTimer( function()
+                    banPlayer( targetPlayer, true, true, true, getPlayerName( player ), reasonBan or "Unknown", timeBan )
+                end, 3000, 1 )
+                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** baniu o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."** pelo motivo **".. reasonBan or "Undefined" .."**", 'Desenvolvido por azarado bugs' )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
             end
@@ -56,7 +62,121 @@ function banPlayer( player, commandName, id, timeBan, reasonBan )
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
     end
 end
-addCommandHandler( commandsAdmin.banPlayer["commandName"], banPlayer )
+addCommandHandler( commandsAdmin.banPlayer["commandName"], gBan )
+
+function gKick( player, commandName, id, ... )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        if id then
+            local reasonKick = table.concat( { ... }, " " )
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi kickado!" )
+                exports["va~notify"]:createNotifyS( player, "success", "Você kickou o jogador ".. getPlayerName( targetPlayer ) .." ID:".. id .."." )
+                setTimer( function()
+                    kickPlayer( targetPlayer, player, reasonKick or "Unknown" )
+                end, 3000, 1 )
+                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."** kickou o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** pelo motivo **".. reasonKick or "Undefined" .."**", 'Desenvolvido por azarado bugs' )
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID] [Motivo]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.kickPlayer["commandName"], gKick )
+
+function tptoPlayer( player, commandName, id )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        if id then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                if ( not exports["va~freecam"]:isPlayerFreecamEnabled( player ) ) then
+                    local targetX, targetY, targetZ = getElementPosition( targetPlayer )
+                    setElementPosition( player, targetX, targetY, targetZ )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** teletransportou para o jogador ".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( player, "success", "Você se teletransportou para o jogador ".. getPlayerName( targetPlayer ) ..", ID: ".. id .."." )
+                else
+                    local targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov = getCameraMatrix( targetPlayer )
+                    setCameraMatrix( player, targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** teletransportou para o jogador ".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( player, "success", "Você se teletransportou para o jogador ".. getPlayerName( targetPlayer ) ..", ID: ".. id .."." )
+                end
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.warpPlayer["commandName"], tptoPlayer )
+
+function tptoMePlayer( player, commandName, id )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        if id then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                if ( not exports["va~freecam"]:isPlayerFreecamEnabled( targetPlayer ) ) then
+                    local targetX, targetY, targetZ = getElementPosition( player )
+                    setElementPosition( targetPlayer, targetX, targetY, targetZ )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** puxou para si mesmo o jogador ".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( targetPlayer, "success", "Você foi teletransportado para o staff ".. getPlayerName( player ) ..", ID: ".. getElementData( player, "va.playerID" ) .."." )
+                else
+                    local targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov = getCameraMatrix( targetPlayer )
+                    setCameraMatrix( player, targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** puxou para si mesmo o jogador ".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( targetPlayer, "success", "Você foi teletransportado para o staff ".. getPlayerName( player ) ..", ID: ".. getElementData( player, "va.playerID" ) .."." )
+                end
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.warpPlayerToMe["commandName"], tptoMePlayer )
+
+function tpPlayerToTarget( player, commandName, id, ntarget )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        ntarget = tonumber( ntarget )
+        if id and ntarget then
+            local playerSelected = exports["va~main"]:getPlayerID( id )
+            local target = exports["va~main"]:getPlayerID( ntarget )
+            local targetX, targetY, targetZ = getElementPosition( target )
+            if playerSelected and target then
+                if ( not exports["va~freecam"]:isPlayerFreecamEnabled( playerSelected ) ) then
+                    setElementPosition( playerSelected, targetX, targetY, targetZ )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** telenstranportou o jogador ".. getPlayerName( playerSelected ) .." ID:".. getElementData( playerSelected, "va.playerID" ).. "** para o jogador **".. getPlayerName( target ) .." ID:".. getElementData( target, "va.playerID" ) .."**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( playerSelected, "success", "Você foi teletransportado para o jogador ".. getPlayerName( playerSelected ) ..", ID: ".. getElementData( playerSelected, "va.playerID" ) .."." )
+                else
+                    local targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov = getCameraMatrix( target )
+                    setCameraMatrix( playerSelected, targetCX, targetCY, targetCZ, targetC2X, targetC2Y, targetC2Z, roll, fov )
+                    exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** telenstranportou o jogador ".. getPlayerName( playerSelected ) .." ID:".. getElementData( playerSelected, "va.playerID" ).. "** para o jogador **".. getPlayerName( target ) .." ID:".. getElementData( target, "va.playerID" ) .."**", 'Desenvolvido por azarado bugs' )
+                    exports["va~notify"]:createNotifyS( playerSelected, "success", "Você foi teletransportado para o jogador ".. getPlayerName( playerSelected ) ..", ID: ".. getElementData( playerSelected, "va.playerID" ) .."." )
+                end
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador(es) não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID] [ID]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.warpPlayerTo["commandName"], tpPlayerToTarget )
 
 function godPlayer( player, commandName, id )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then

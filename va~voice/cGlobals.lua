@@ -4,56 +4,38 @@ bShowChatIcons = true
 voicePlayers = {}
 globalMuted = {}
 
----
---[[
-addEventHandler ( "onClientPlayerVoiceStart", root,
-	function()
-		if isPlayerVoiceMuted ( source ) then
-			cancelEvent()
-			return
-		end
-		voicePlayers[source] = true
-	end
-)]]--
-
-local range = 5
+local range = 8
 
 addEventHandler ( "onClientPlayerVoiceStart", root, 
 function() 
     if (source and isElement(source) and getElementType(source) == "player") and localPlayer ~= source then 
-
-		if getElementData(source, "inCall") == true then 
-		voicePlayers[source] = true 
-		
+		if getElementData( source, "va.muteVoice") then
+			cancelEvent()
 		else
-	
-        local sX, sY, sZ = getElementPosition(localPlayer) 
-        local rX, rY, rZ = getElementPosition(source) 
-        local distance = getDistanceBetweenPoints3D(sX, sY, sZ, rX, rY, rZ) 
-        if distance <= range then 
-            voicePlayers[source] = true 
-        else 
-            cancelEvent()
-        end 
+			if getElementData(source, "va.inCall") == true then 
+				voicePlayers[source] = true 
+			else
+				local voiceRange = getElementData( localPlayer, "va.rangeVoice" )
+				if voiceRange == "Falando" then
+					range[source] = 8
+				elseif voiceRange == "Gritando" then
+					range[source] = 20
+				elseif voiceRange == "Susurrando" then
+					range[source] = 3
+				end
+				local sX, sY, sZ = getElementPosition(localPlayer) 
+				local rX, rY, rZ = getElementPosition(source) 
+				local distance = getDistanceBetweenPoints3D(sX, sY, sZ, rX, rY, rZ) 
+				if distance <= range then 
+					voicePlayers[source] = true 
+				else 
+					cancelEvent()
+				end 
+			end
 		end
     end 
 end     
 ) 
-
-
---[[
-addEventHandler("onClientPreRender", root,
-    function ()
-       local players = getElementsByType("player", root, true) -- table of sounds which will be transformed into 3D
-	   for k, v in ipairs(players) do 
-	   if getElementData(v, "inCall") == false then 
-		setSoundVolume(v, 10)
-		setSoundPan(v, 0)
-		end
-		end
-end
-, false)
-]]--
 
 addEventHandler ( "onClientPlayerVoiceStop", root,
 	function()
@@ -75,11 +57,3 @@ function checkValidPlayer ( player )
 	end
 	return true
 end
-
----
---[[
-setTimer ( 
-	function()
-		bShowChatIcons = getElementData ( resourceRoot, "show_chat_icon", show_chat_icon )
-	end,
-SETTINGS_REFRESH, 0 )]]--

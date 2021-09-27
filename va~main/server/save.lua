@@ -3,16 +3,17 @@ function playerLogin( thePreviousAccount, theCurrentAccount, autologin )
         local accountData = getAccountData( theCurrentAccount, "va.money" )
         if ( accountData ) then
             local vaMoney = getAccountData( theCurrentAccount, "va.money" )
-            local vaSkin = getAccountData( theCurrentAccount, "va.skin" )
             local vaWanted = getAccountData( theCurrentAccount, "va.wanted" )
             local vaStaff = getAccountData( theCurrentAccount, "va.adminlevel" )
             setPlayerMoney( source, vaMoney )
-            setElementModel( source, vaSkin )
+            setElementModel( source, 0 )
             setPlayerWantedLevel( source, vaWanted )
             setElementData( source, "va.adminlevel", vaStaff )
+            setElementData( source, "va.rangeVoice", "Falando" )
         else
             setPlayerMoney( source, 2500 )
             setPlayerWantedLevel( source, 0 )
+            setElementModel( source, 0 )
             setElementData( source, "va.adminlevel", 0 )
         end
     else
@@ -36,6 +37,7 @@ function exitDuty( player )
         setElementData( player, "va.onDuty", false )
     end
 end
+addEventHandler( 'onPlayerExit', getRootElement(), exitDuty )
 
 function playerSave( quitType, reason, responsibleElement )
     if not ( isGuestAccount ( getPlayerAccount ( source ) ) ) then

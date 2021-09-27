@@ -40,19 +40,19 @@ bindKey( 'r', 'down',
 	end
 )
 
-bindKey( 'x', 'both',
-	function( key, keyState )
-		if keyState == "down" then
-			if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
-				setElementData( localPlayer, "va.radioLiberado", true )
-			else
-				setElementData( localPlayer, "va.radioLiberado", false )
-			end
-		elseif keyState == "up" then
+function freeRadio()
+	if tonumber( getElementData( localPlayer, "va.frequencyR" ) or 0 ) > 0 then
+		local radioFree = getElementData( localPlayer, "va.radioLiberado" )
+		if radioFree then
 			setElementData( localPlayer, "va.radioLiberado", false )
+		else
+			setElementData( localPlayer, "va.radioLiberado", true )
 		end
+	else
+		return
 	end
-)
+end
+addCommandHandler( 'Liberar para falar no radio', freeRadio )
 
 function voicePlayer()
 	if connect then
@@ -60,7 +60,7 @@ function voicePlayer()
 		if frequency and frequency > 0 and frequency < 1000 then
 			if getElementData( localPlayer, "va.radioLiberado" ) then
 				playSound( ':va~voice/audio/voice.wav' )
-				print( 'Speaking' )
+				setElementData( localPlayer, "va.speakingRadio", true )
 				addEventHandler( 'onClientPedsProcessed', root, playerAnimation )
 			else
 				cancelEvent()
@@ -72,6 +72,7 @@ bindKey( 'z', 'down', voicePlayer )
 
 function voicePlayerUp()
 	if connect then
+		setElementData( localPlayer, "va.speakingRadio", false )
 		removeEventHandler( 'onClientPedsProcessed', root, playerAnimation )
 	else
 		return false

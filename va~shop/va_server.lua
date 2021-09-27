@@ -1,8 +1,14 @@
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
+end
+
 function buyItem( player, itemID, itemPrice, itemAmount )
     if itemPrice and itemPrice then
         local playerMoney = getPlayerMoney( player )
         if playerMoney >= itemPrice then
             if exports["va~inventory"]:giveItem( player, itemID, itemAmount, itemAmount, 0, true ) then
+                takePlayerMoney( player, itemPrice )
                 exports["va~notify"]:createNotifyS( player, "success", "Você comprou x".. itemAmount .." do item ".. exports["va~inventory"]:getItemName( itemID ) .."." )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Ocorreu algum erro tente novamente!" )

@@ -4,7 +4,13 @@
     <script src="shared/general.lua" type="shared" cache="false"/>
     <script src="shared/player.lua" type="shared" cache="false"/>
 
+    <script src="client/binds.lua" type="client" cache="false"/>
     <script src="client/models.lua" type="client" cache="false"/>
+    <script src="client/player.lua" type="client" cache="false"/>
+
+    <script src="maps/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
+    <script src="maps/mapEditorScriptingExtension_s.lua" type="server"></script>
+    <map src="maps/vabase.map" dimension="0"></map>
 
     <script src="server/discord.lua" type="server" cache="false"/>
     <script src="server/resources.lua" type="server" cache="false"/>

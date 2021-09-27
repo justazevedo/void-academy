@@ -45,6 +45,14 @@ function justShow()
     setElementRotation( localPlayer, -0, 0, 247.2734 )
     showChat( false )
     exports["va~interface"]:setInterface( false )
+    setElementData( localPlayer, "va.gangID", 0 )
+    setElementModel( localPlayer, 0 )
+    for index, value in ipairs( groups ) do
+        playerAt = setTimer( function( )
+            local count = countPlayersInTeam( getTeamFromName( string.gsub( groups[index].name, "_", " " ) ) )
+            executeBrowserJavascript( nui, "window.postMessage( { editID : ".. index ..", editName : '".. groups[index].name .."', editPlayers : ".. count ..", editVagas : ".. groups[index].vagas .." }, '*' )" )
+        end, 2000, 0 )
+    end
     --[[playerAt = setTimer( function( )
         local count = countPlayersInTeam( getTeamFromName( string.gsub( groups[index].name, "_", " " ) ) )
         if count > 0 then
@@ -90,6 +98,7 @@ end
 function selectedSkin( gangID, id )
     gangID = tonumber( gangID ) id = tonumber( id )
     if gangID ~= 0 and groups[gangID].skin[id] then
+        setElementData( localPlayer, "va.gangID", gangID )
         triggerServerEvent( 'va.spawnGroups', localPlayer, localPlayer, groups[gangID].spawn[1], groups[gangID].spawn[2], groups[gangID].spawn[3], groups[gangID].skin[id], string.gsub( groups[gangID].name, "_", " ") )
     else
         return exports["va~notify"]:createNotify( localPlayer, 'error', 'Ocorreu algum error contate um administrador' )
