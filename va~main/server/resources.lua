@@ -1,4 +1,4 @@
-function startResources( )
+﻿function startResources( )
     for resourceIndex, resourceName in ipairs( listResources ) do
         --135.148.31.105
         if getServerIP() ~= "auto" then

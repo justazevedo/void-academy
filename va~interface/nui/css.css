@@ -3,7 +3,7 @@ body {
     margin: auto;
     padding: auto;
     overflow: hidden;
-    background: currentColor !important;
+    background: transparent !important;
 }
 
 .container {
