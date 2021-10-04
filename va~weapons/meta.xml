@@ -48,7 +48,7 @@
     <file src="skins/five_trovao.jpg"/>
 
     <export function="setTexture" type="server"/>
-    <export function="getWeaponWeaponShaderName" type="shared"/>
+    <export function="getWeaponShaderName" type="shared"/>
     <export function="isStickerValid" type="shared" />
 
     <!-- models -->

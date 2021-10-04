@@ -27,7 +27,7 @@ end
 addEvent( 'va.toggleRadio', true )
 addEventHandler( 'va.toggleRadio', root, toggleRadio )
 
-bindKey( 'r', 'down',
+addCommandHandler( 'Fechar o Radio',
 	function( )
 		if getElementData( localPlayer, "va.enabledRadio" ) then
 			guiSetVisible( browser, false )

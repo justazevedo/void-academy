@@ -50,7 +50,7 @@ local validSkins = {
     ["five_trovao"] = true,
 }
 
-function getWeaponWeaponShaderName( wep )
+function getWeaponShaderName( wep )
     if wep then
         if weaponSkins[wep] then
             return weaponSkins[wep]

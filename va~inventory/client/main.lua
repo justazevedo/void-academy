@@ -603,9 +603,9 @@ function clickInventory(button, state, _, _, _, _, _, element)
 												end
 											end	]]
 										elseif getElementType(inventoryElement) == "vehicle" and getElementType(element) == "player" and element == localPlayer then
-											--triggerServerEvent('va.movedItemToElement', inventoryElement, inventoryElement, element, movedItem[1], movedItem[2], movedItem[3], movedItem[4])
-										elseif getElementType(inventoryElement) == "object" and getElementType(element) == "player" and element == localPlayer then
-											--triggerServerEvent('va.movedItemToElement', inventoryElement, inventoryElement, element, movedItem[1], movedItem[2], movedItem[3], movedItem[4])
+											--triggerServerEvent('va.movedItemToElement', inventoryElement, inventoryElement, element, movedItem[1], movedItem[2], movedItem[3], movedItem[4] )
+										elseif getElementType(inventoryElement) == "object" then
+											triggerServerEvent('va.movedItemToElement', inventoryElement, inventoryElement, "object", movedItem[1], movedItem[2], movedItem[3], movedItem[4] )
 										end
 									else
 										exports["va~notify"]:createNotify( element, 'error', 'Você está muito pesado '.. baseWeight ..'kg.' )
@@ -656,7 +656,7 @@ function clickInventory(button, state, _, _, _, _, _, element)
 			movedItem = {}
 		end
 		movedItem = {}
-	elseif button == 'right' and state == 'down' and not showInventory and element then 
+	--elseif button == 'right' and state == 'down' and not showInventory and element then 
 		--[[if getElementType(element) == "vehicle" and not cursorinInventory and not isMove and getElementData(element, "va.ownerCar") == getElementData(localPlayer, "va.id") or getElementData( localPlayer, "va.adminlevel" ) or 0 > 5  then --tonumber(getElementData(element, "dbid")) or -1 > 0 then
 			if isTimer(packetTimer) then return end
 			local x,y,z = getElementPosition(localPlayer)

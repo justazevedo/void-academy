@@ -24,14 +24,14 @@ end
 
 
 function loadItemToTable()
-	local typeText = "weapon"
+	local typeText = "bag"
 
 	local query = dbQuery(connection, "SELECT * FROM items;" )
 	local result, numrows = dbPoll(query, -1)
 	if (result and numrows > 0) then
 		for index, itemtables in ipairs(result) do
 			if tonumber(itemtables["type"]) == 1 or tonumber(itemtables["type"]) == 2 then 
-				typeText = "weapon"
+				typeText = "bag"
 			else
 				typeText = getItemType(tonumber(itemtables["itemid"]))
 			end
@@ -516,68 +516,74 @@ end
 
 ------------------------------
 
-local kuka 
+local trash 
 
 function loadTrash()
 	local query = dbQuery(connection, "SELECT * FROM bins;" )
 	local result, numrows = dbPoll(query, -1)
 	if (result and numrows > 0) then
 		for index, trashPos in pairs(result) do
-			trashPos = fromJSON(trash["pos"]) or "[[ 0,0,0,0,0,0,0,0 ]]"
-			kuka = createObject(1359, trashPos[1],trashPos[2], trashPos[3]-0.4, trashPos[4], trashPos[5], trashPos[6])
-			setElementData(kuka, "kukaID", trash['id'])
-			setElementInterior(kuka, trashPos[7])
-			setElementDimension(kuka, trashPos[8])
+			trashPos = fromJSON( trashPos["pos"] ) or "[[ 0,0,0,0,0,0,0,0 ]]"
+			trash = createObject( 1359, trashPos[1],trashPos[2], trashPos[3]-0.4, trashPos[4], trashPos[5], trashPos[6] )
+			setElementData( trash, "va.trashID", trashPos['id'] )
+			setElementInterior( trash, trashPos[7] )
+			setElementDimension( trash, trashPos[8] )
 		end
 	end
 end
 
-
-addCommandHandler("lixeira",
-function(playerSource, cmd)
-	    if isObjectInACLGroup("user."..getAccountName(getPlayerAccount(playerSource)), aclGetGroup("Console")) then
-		local x, y, z = getElementPosition(playerSource)
-		local rx, ry, rz = getElementRotation(playerSource)
-		local int = getElementInterior(playerSource)
-		local Dim = getElementDimension(playerSource)
-		
-		local Query, _, insertID = dbQuery(connection,"INSERT INTO bins (pos) VALUES(?)", toJSON({x, y, z, rx, ry, rz, int ,Dim})) -- SQL BEszúrás
-
-
-		local checkQuery, _, insertID = dbPoll ( Query, -1 )
+function createTrash( player, commandName )
+	if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 5 ) then
+		local playerX, playerY, playerZ = getElementPosition( player )
+		local rotationX, rotationY, rotationZ = getElementRotation( player )
+		local interior = getElementInterior( player )
+		local dimension = getElementDimension( player )
+		local query, _, insertID = dbQuery( connection, "INSERT INTO bins ( pos ) VALUES ( ? )", toJSON( { playerX, playerY, playerZ, rotationX, rotationY, rotationZ, interior, dimension } ) )
+		local checkQuery, _, insertID = dbPoll( query, -1 )
 		if checkQuery then
-			outputChatBox("#7cc576[btc~Items] #ffffff Lixo criado.", playerSource, 255,255, 255, true)
-			kuka = createObject(1359, x, y, z-0.4, rx, ry, rz)
-			setElementData(kuka, "kukaID", insertID)
-			setElementInterior(kuka, int)
-			setElementDimension(kuka, Dim)
+			exports["va~notify"]:createNotifyS( player, "success", "Lixo criado com sucesso." )
+			exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."** criou uma lixeira em **".. getZoneName( playerX, playerY, playerZ ) .." ID:".. insertID .."**", 'Desenvolvido por azarado bugs' )
+			trash = createObject( 1359, playerX, playerY, playerZ - 0.4, rotationX, rotationY, rotationZ )
+			setElementData( trash, "va.trashID", insertID )
+			setElementInterior( trash, interior )
+			setElementDimension( trash, dimension )
+		else
+			exports["va~notify"]:createNotifyS( player, "error", "Ocorreu algum erro contate um desenvolvedor!" )
 		end
+	else
+		return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
 	end
-end)
+end
+addCommandHandler( 'clixeira', createTrash )
 
-addCommandHandler("deletarlixeira",
-function(playerSource, cmd)
-	    if isObjectInACLGroup("user."..getAccountName(getPlayerAccount(playerSource)), aclGetGroup("Console")) then
-		local x, y, _ = getElementPosition(playerSource)
-		local kukashape = createColCircle ( x, y, 3 )
-		local kukaszam = 0
-		for _,v in ipairs(getElementsWithinColShape ( kukashape, "object" ) ) do
-				local kukaid = getElementData(v,"kukaID") or 0
-				kukaszam = kukaszam + 1
-				destroyElement(kukashape)
-				if kukaid >= 1 then 
-					destroyElement(v)
-				end
-				dbPoll ( dbQuery( connection, "DELETE FROM bins WHERE id = '?'", kukaid), 0 )
-				outputChatBox("#7cc576[btc~Items] #ffffffLixeira excluída com sucesso. ID: #F7CA18"..kukaid, playerSource, 255, 255, 255, true)		
-				return
+function deleteTrash( player, commandName )
+	if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 5 ) then
+		local playerX, playerY, playerZ = getElementPosition( player )
+		local trashShape = createColCircle( playerX, playerY, 3 )
+		local myTrash = 0
+		for _, value in ipairs( getElementsWithinColShape( trashShape, "object" ) ) do
+			local trashID = getElementData( value, "va.trashID" ) or 0
+			myTrash = myTrash + 1
+			destroyElement( trashShape )
+			if trashID >= 1 then
+				destroyElement( value )
+			elseif trashID < 1 then
+				destroyElement( value )
+			end
+			dbPoll( dbQuery( connection, "DELETE FROM bins WHERE id = '?'", trashID ), 0 )
+			exports["va~notify"]:createNotifyS( player, "success", "Lixeira excluída com sucesso. ID: ".. trashID .."." )
+			exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."** deletou uma lixeira em **".. getZoneName( playerX, playerY, playerZ ) .." ID:".. trashID .."**", 'Desenvolvido por azarado bugs' )
+			return
 		end
-		if(kukaszam == 0) then
-			destroyElement(kukashape)
-			outputChatBox("#D24D57[btc~Items] #ffffffNão há lixo perto de você.", playerSource, 255, 255, 255, true)
+		if ( myTrash == 0 ) then
+			destroyElement( trashShape )
+			exports["va~notify"]:createNotifyS( player, "warning", "Não há lixo perto de você." )
 		end
+	else
+		return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
 	end
-end)
+end
+addCommandHandler( 'dlixeira', deleteTrash )
 
 ------------------------------
 
@@ -624,7 +630,44 @@ addEventHandler('va.createAttachObj', root, createAttachObj)
 
 ------------------------------
 
-function setWeapon( element, slot, item )
+commandsDisable = {
+    'next_weapon',
+    'previous_weapon'
+}
+
+function setWeapon( player, itemSlot, itemID )
+	if itemID and itemLists[itemID].weaponID and getPedWeapon( player ) > 0 and tonumber( getPedWeapon( player ) ) ~= tonumber( itemLists[itemID].weaponID ) then
+		return exports["va~notify"]:createNotifyS( player, "error", "Guarde sua arma antes." )
+	end
+	takeAllWeapons( player )
+	if ( getElementData( player, "va.weaponInHand" ) or { -1, -1, -1 } )[1] < 1 then
+		local ammo = 9999
+		giveWeapon( player, itemLists[itemID].weaponID, ammo, true )
+		for _, commands in ipairs( commandsDisable ) do
+			toggleControl( player, commands, false )
+		end
+		setElementData( player, "va.weaponInHand", { itemID, itemSlot, itemLists[itemID].weaponID } )
+		setElementData( player, "va.weaponGettin" .. getItemType( itemID ) .. itemSlot, true )
+		toPublic( player, itemSlot, getItemType( itemID ) )
+		exports["va~weapons"]:setTexture( player, exports["va~weapons"]:getWeaponShaderName( getWeaponID( itemID ) ), getStickerWeapon( itemID ) )
+		reloadPedWeapon( player )
+	else
+		if getElementData( player, "va.weaponGettin" .. getItemType( itemID ) .. itemSlot ) then
+			setElementData( player, "va.weaponInHand", { -1, -1, -1 } )
+			setElementData( player, "va.weaponGettin" .. getItemType( itemID ) .. itemSlot, false )
+			toPublic( player, itemSlot, getItemType( itemID ) )
+			for _, commands in ipairs( commandsDisable ) do
+				toggleControl( player, commands, true )
+			end
+		end
+	end
+end
+
+function toPublic( player, itemSlot, itemID )
+	setElementData( player, "va.weaponSlotData", itemSlot )
+	setElementData( player, "va.weaponIdData", itemID )
+end 
+--[[function setWeapon( element, slot, item )
 	if item and itemLists[item].weaponID and getPedWeapon( element ) > 0 and tonumber( getPedWeapon( element ) ) ~= tonumber( itemLists[item].weaponID ) then
 		return exports["va~notify"]:createNotifyS( element, "info", "Guarde sua arma antes." )
 	end
@@ -643,7 +686,7 @@ function setWeapon( element, slot, item )
 			setElementData( element, "va.weaponGettin" .. getItemType( item ) .. slot, false )
 		end
 	end
-end
+end]]
 addEvent( "va.setWeapon", true )
 addEventHandler( "va.setWeapon", root, setWeapon )
 

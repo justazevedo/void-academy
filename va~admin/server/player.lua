@@ -14,6 +14,7 @@ function adminDuty( player, commandName )
         if not getElementData( player, "va.onDuty" ) or false then
             exports["va~main"]:batePonto( 'voidAcademy - Staffs', "16750848", "O staff **".. getPlayerName( player ) .."** **ID:".. getElementData( player, "va.playerID" ) .."** entrou em serviço as **".. hours ..":".. minutes ..":".. seconds .."**", 'Desenvolvido por azarado bugs' )
             exports["va~notify"]:createNotifyS( player, "success", "Você entrou em serviço" )
+            setElementModel( player, 217 )
             setElementData( player, "va.onDuty", true )
             setElementHealth( player, 100 )
             setPedArmor( player, 100 )
@@ -37,6 +38,20 @@ function adminDuty( player, commandName )
     end
 end
 addCommandHandler( commandsAdmin.adminDuty["commandName"], adminDuty )
+
+--[[function takeItem( player, commandName, id )
+    id = tonumber( id )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 5 ) then
+        if id then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                exports["va~notify"]:createNotifyS( targetPlayer, "warning", "O administrador ".. getPlayerName( player ) .." limpou seu inventário!" )
+                exports["va~notify"]:createNotifyS( player, "success", "Você limpou o inventário de ".. getPlayerName( targetPlayer ) .."." )
+                exports["va~inventory"]:takePlayerItemToID( targetPlayer,  )
+            end
+        end
+    end
+end]]
 
 function gBan( player, commandName, id, timeBan, ... )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 3 ) then
@@ -249,11 +264,34 @@ function setArmor( player, commandName, id, armor )
 end
 addCommandHandler( commandsAdmin.setarmor["commandName"], setArmor )
 
+function setMoney( player, commandName, id, amount )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 11 ) then
+        id = tonumber( id )
+        amount = tonumber( amount )
+        if id and amount then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                givePlayerMoney( targetPlayer, amount )
+                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** deu a quantia **V$".. amount ..",00** para o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."**", 'Desenvolvido por azarado bugs' )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você recebeu V$".. amount ..",00 do administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( player, "success", "Você deu V$".. amount ..",00 para o jogador ".. getPlayerName( targetPlayer ) .."." )
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID] [Quantia]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.setmoney["commandName"], setMoney )
+                
 function setAdmin( player, commandName, id, adminlevel )
     id = tonumber( id )
     adminlevel = tonumber( adminlevel )
     local accName = getAccountName( getPlayerAccount ( player ) )
-    if isObjectInACLGroup( "user.".. accName, aclGetGroup( 'Admin' ) ) then
+    if isObjectInACLGroup( "user.".. accName, aclGetGroup( 'Admin' ) ) or ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 11) then
         if id and adminlevel then
             local targetPlayer = exports["va~main"]:getPlayerID( id )
             if targetPlayer then
@@ -282,7 +320,6 @@ function givePlayerItem( player, commandName, id, itemID, amountItem )
             local targetPlayer = exports["va~main"]:getPlayerID( id )
             if targetPlayer then
                 if exports["va~inventory"]:giveItem( targetPlayer, itemID, amountItem, amountItem, 0, true ) then
-                    triggerEvent( "va.inventoryGiveItem", player, targetPlayer, itemID, amountItem, 1 )
                     exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** setou o item de **Nome:".. exports["va~inventory"]:getItemName(itemID) .." e ID:".. itemID .."** para o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** Quantia: **".. amountItem .."**", 'Desenvolvido por azarado bugs' )
                     exports["va~notify"]:createNotifyS( targetPlayer, "info", "O administrador ".. getPlayerName( player ) .." setou algum item para você." )
                     exports["va~notify"]:createNotifyS( player, "success", "Item setado com sucesso." )
@@ -328,14 +365,21 @@ function noClip( player, commandName )
             end
             local x, y, z = getElementPosition( player )
             exports["va~freecam"]:setPlayerFreecamEnabled( player, x, y, z )
-            setElementPosition( player, x, y, z - 10 )
+            update_position = setTimer(
+                function()
+                    local cameraX, cameraY, cameraZ = getCameraMatrix( player )
+                    setElementPosition( player, cameraX, cameraY, cameraZ )
+                end, 200, 0
+            )
             toggleControl( player, "walk", false )
             setElementAlpha( player, 0 )
             exports["va~notify"]:createNotifyS( player, "info", "Você entrou no modo noClip." )
         else
             local x, y, z = getCameraMatrix( player )
             exports["va~freecam"]:setPlayerFreecamDisabled( player )
-            setElementPosition( player, x, y, z )
+            if isTimer( update_position ) then
+                killTimer( update_position )
+            end
             toggleControl( player, "walk", true )
             setElementAlpha( player, 255 )
             setCameraTarget( player )

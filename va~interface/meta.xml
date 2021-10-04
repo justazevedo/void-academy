@@ -19,4 +19,5 @@
     <file src="nui/images/logo.png" />
     
     <export function="setInterface" type="shared" />
+    <export function="getHud" type="shared" />
 </meta>

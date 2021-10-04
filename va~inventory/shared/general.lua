@@ -1,5 +1,5 @@
 ﻿-- inventoryElem = { 'bag', 'weapon', 'key', 'craft'} -- // Inventory szétválasztások
-inventoryElem = { 'weapon' } -- // Inventory szétválasztások
+inventoryElem = { 'weapon', 'bag' } -- // Inventory szétválasztások
 row = 8 -- // Sor
 column = 6 -- // Oszlop
 baseWeight = 25 --// Alap peso
@@ -11,7 +11,7 @@ maxCraftSlot = 16 -- // Craft slot
 maxCraftRecipe = 9 -- // max Craft receptek
 
 itemLists = {
-	{name = "Radio", desc="Ferramenta de contato rápido.", weight=0.2, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --1
+	{name = "Radio", desc="Ferramenta de contato rápido.", weight=0.2, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'bag'}, --1
 	{name = "Molotov", desc="Há um fogo forte quando você joga fora.", weight=0.4, stack = false, weaponID = 18, AmmoID = false, level=4, itemTypes= 'weapon'}, --2
 	{name = "Desert Eagle", desc="Uma arma com risco de vida contendo munição forte.", weight=2.2, stack = false, weaponID = 24, AmmoID = 57, level=3, itemTypes= 'weapon'}, --3
 	{name = "Five Seven", desc="Somente uma five.", weight=1, stack = false, weaponID = 23, AmmoID = false, level=0, itemTypes= 'weapon'}, --4
@@ -123,9 +123,9 @@ itemLists = {
 	{name = "Five-Seven Simpson", desc="Simpson.", weight=1, stack = false, weaponID = 23, AmmoID = false, level=0, itemTypes= 'weapon'}, --104
 	{name = "Five-Seven Trovao", desc="Trovao.", weight=1, stack = false, weaponID = 23, AmmoID = false, level=0, itemTypes= 'weapon'}, --105
 
-	{name = "Bolsa", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --106
-	{name = "Bolsa premium", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --107
-	{name = "Monster Energy", desc="Use para ficar bem mais rapido.", weight=0.02, stack = true, weaponID = false, AmmoID = false, level=0, itemTypes= 'weapon'}, --108
+	{name = "Bolsa", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'bag'}, --106
+	{name = "Bolsa premium", desc="Se você precisar de mais objetos, sempre vem bem.", weight=0.01, stack = false, weaponID = false, AmmoID = false, level=0, itemTypes= 'bag'}, --107
+	{name = "Monster Energy", desc="Use para ficar bem mais rapido.", weight=0.02, stack = true, weaponID = false, AmmoID = false, level=0, itemTypes= 'bag'}, --108
 
 }
 
@@ -207,7 +207,7 @@ function getItemToType(element, items)
 		if tonumber(getType(element)) == 1 or tonumber(getType(element)) == 2 then 
 			itemType = tostring('bag')
 		else
-			itemType = tostring('weapon')
+			itemType = tostring(itemLists[tonumber(items)].itemTypes)
 		end
 	end
 	return itemType

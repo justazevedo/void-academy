@@ -4,6 +4,7 @@ commandsAdmin = {
     sethealth = { commandName = 'setvida', description = 'Seta a vida do jogador.' },
     setarmor = { commandName = 'setcolete', description = 'Seta o colete do jogador.' },
     setadmin = { commandName = 'setadmin', description = 'Seta o nivel do admin.' },
+    setmoney = { commandName = 'setmoney', description = 'Enviar dinheiro para um jogador especifca.' },
     banPlayer = { commandName = 'gban', description = 'Bani o jogador do servidor.' },
     kickPlayer = { commandName = 'gkick', description = 'Expulsa o jogador da cidade.' },
     warpPlayer = { commandName = 'tpto', description = 'Telentrasporta para um jogador especifico.' },
@@ -12,10 +13,13 @@ commandsAdmin = {
     godPlayer = { commandName = 'god', description = 'Seta vida e colete 100%' },
     verinv = { commandName = 'verinv', description = 'Mostra o inventario de um jogador especifico.' },
     giveitem = { commandName = 'giveitem', description = 'Envia um item para um jogador especifico.' },
-    createvehicle = { commandName = 'car', description = 'Cria um carro para quem usa o comando.' },
+    createvehicle = { commandName = 'car', description = 'Cria um veículo para quem usa o comando.' },
+    fixVehicle = { commandName = 'fixar', description = 'Repara o veículo mais próximo ou para um veículo especifico.' },
     destroyvehicle = { commandName = 'dv', description = 'Destroi o carro mais proximo.' },
     infosvehicle = { commandName = 'infoc', description = 'Checa as informações de um veiculo.' },
-    namevehicle = { commandName = 'vlist', description = 'Mostrar os nomes de veiculos disponiveis.' }
+    namevehicle = { commandName = 'vlist', description = 'Mostrar os nomes de veiculos disponiveis.' },
+    createTrash = { commandName = 'clixeira', description = 'Cria uma lixeira na posição do jogador que utilizar o comando.' },
+    deleteTrash = { commandName = 'dlixeira', description = 'Deleta a lixeira mais proxima do jogador que utilizar o comando.' }
 }
 
 vehicleNames = {"Landstalker", "Bravura", "Buffalo", "Linerunner", "Perennial", "Sentinel", "Dumper", "Fire Truck", "Trashmaster", "Stretch", "Manana", 

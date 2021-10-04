@@ -16,7 +16,9 @@ function openList( commandName )
     if ( tonumber( getElementData( localPlayer, "va.adminlevel" ) ) >= 1 ) then
         if not guiGetVisible( browser ) then
             guiSetVisible( browser, true )
-            exports["va~interface"]:setInterface( false )
+            if exports["va~interface"]:getHud() then
+                exports["va~interface"]:setInterface( false )
+            end
             showCursor( true )
             for index, value in pairs( commandsAdmin ) do
                 executeBrowserJavascript( nui, "window.postMessage( { name : '".. value["commandName"] .."', description : '".. value["description"] .."', close : false }, '*' )" )
@@ -24,7 +26,9 @@ function openList( commandName )
         else
             executeBrowserJavascript( nui, "window.postMessage( { close : true }, '*')" )
             guiSetVisible( browser, false )
-            exports["va~interface"]:setInterface( true )
+            if not exports["va~interface"]:getHud() then
+                exports["va~interface"]:setInterface( true )
+            end
             showCursor( false )
         end
     else
@@ -32,3 +36,16 @@ function openList( commandName )
     end
 end
 addCommandHandler( 'ahelp', openList )
+
+bindKey( 'backspace', 'down',
+    function()
+        if guiGetVisible( browser ) then
+            executeBrowserJavascript( nui, "window.postMessage( { close : true }, '*')" )
+            guiSetVisible( browser, false )
+            if not exports["va~interface"]:getHud() then
+                exports["va~interface"]:setInterface( true )
+            end
+            showCursor( false )
+        end
+    end
+)

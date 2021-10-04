@@ -12,10 +12,14 @@ listResources = {
     'login',
     'notify',
     'radio',
+    'safe',
     'shop',
+    'terrains',
+    'vehicles',
     'voice',
     'weapons',
 }
 
-bindKeyStartRadio = 'capslock'
+bindKeyStartFreeRadio = 'capslock'
 bindKeyStartChangeRange = 'x'
+bindKeyStartCloseRadio = 'r'

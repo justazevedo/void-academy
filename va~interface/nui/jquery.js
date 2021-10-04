@@ -14,12 +14,21 @@ $(document).ready(function() {
 
         if (hud.voice == "Gritando") {
             $('.voz').html('Gritando');
+            $('.voz').css('left', '64%');
+            $('.space').css('left', '59.5%');
+            $('.radio').css('left', '30%');
             $('.microphone').css('color','rgb(255, 49, 49)')
         } else if (hud.voice == "Falando") {
             $('.voz').html('Falando');
+            $('.voz').css('left', '66%');
+            $('.space').css('left', '61.5%');
+            $('.radio').css('left', '32%');
             $('.microphone').css('color','rgb(0, 199, 0)');
         } else if (hud.voice == "Susurrando") {
+            $('.voz').css('left', '53%');
             $('.voz').html('Susurrando');
+            $('.space').css('left', '49.5%');
+            $('.radio').css('left', '20%');
             $('.microphone').css('color','rgb(255, 152, 17)');
         }
         
@@ -91,6 +100,14 @@ $(document).ready(function() {
                 $('.energy').css('marginLeft', '0%');
                 $(".armor").css("opacity", 1)
             }, 300 )
+        }
+
+        if(hud.armour == 0 & hud.energy == 0) {
+            $(".container").css("height", "48.47px")
+            $('.ammo').css('top', '-30%');
+        } else {
+            $(".container").css("height", "70.47px")
+            $('.ammo').css('top', '-20%');
         }
     });
 

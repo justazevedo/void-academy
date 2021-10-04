@@ -4,12 +4,19 @@ if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua'
 end
 
 function playerJoin()
+    setElementData( source, "va.loggedin", false )
     setElementData( source, "va.rangeVoice", 'Falando' )
     fadeCamera( source, true, 5 )
     setCameraMatrix( source, 1335.1314697266, -1400.3842773438, 33.302700042725, 1334.1617431641, -1400.3864746094, 33.058326721191, 0, 90 )
-    triggerClientEvent( source, "va.loginPanel", source, source, "show" )
 end
 addEventHandler( "onPlayerJoin", root, playerJoin )
+
+function setToLogin()
+    if not getElementData( source, "va.loggedin" ) then
+        triggerClientEvent( source, "va.loginPanel", source, source, "show" )
+    end
+end
+addEventHandler( 'onPlayerResourceStart', root, setToLogin )
 
 function panelFunctions( player, event, username, password )
     if event == "logIn" then
