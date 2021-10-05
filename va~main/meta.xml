@@ -25,6 +25,7 @@
     
     <export function="playerSave" type="shared"/>
 	<export function="sendLogs" type="shared"/>
+    <export function="send_punicoes" type="shared"/>
     <export function="batePonto" type="shared"/>
     <export function="getPlayerID" type="shared"/>
     <export function="getNearestElement" type="shared"/>

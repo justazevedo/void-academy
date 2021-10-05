@@ -94,7 +94,9 @@ function setInterface( value )
         showChat( true )
     else
         hud = false
-        killTimer( statsPlayer )
+        if isTimer( statsPlayer ) then
+            killTimer( statsPlayer )
+        end
         setElementData( localPlayer, "va.actionbar", false )
         showChat( false )
         executeBrowserJavascript( browser, "window.postMessage( { opacity : 0 }, '*' )" )

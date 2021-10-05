@@ -1,4 +1,5 @@
 teamStaff = createTeam( "Staff", 155, 155, 155 )
+teamPunido = createTeam( "Punido(s)", 155, 155, 155 )
 
 if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/server/resource.lua' ) then
     stopResource( getThisResource( ) )
@@ -39,39 +40,29 @@ function adminDuty( player, commandName )
 end
 addCommandHandler( commandsAdmin.adminDuty["commandName"], adminDuty )
 
---[[function takeItem( player, commandName, id )
-    id = tonumber( id )
-    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 5 ) then
-        if id then
-            local targetPlayer = exports["va~main"]:getPlayerID( id )
-            if targetPlayer then
-                exports["va~notify"]:createNotifyS( targetPlayer, "warning", "O administrador ".. getPlayerName( player ) .." limpou seu inventário!" )
-                exports["va~notify"]:createNotifyS( player, "success", "Você limpou o inventário de ".. getPlayerName( targetPlayer ) .."." )
-                exports["va~inventory"]:takePlayerItemToID( targetPlayer,  )
-            end
-        end
-    end
-end]]
+local reasonBan
+local reasonKick
 
 function gBan( player, commandName, id, timeBan, ... )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 3 ) then
         id = tonumber( id )
-        timeBan = tonumber( timeBan )
+        timeBan = tonumber( timeBan * 3600 )
         if id and timeBan then
-            local reasonBan = table.concat( { ... }, " " )
+            reasonBan = table.concat( { ... }, " " )
             local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if not reasonBan then reasonBan = 'Undifined' end
             if targetPlayer then
-                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você banido!" )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi banido!" )
                 exports["va~notify"]:createNotifyS( player, "success", "Você baniu o jogador ".. getPlayerName( targetPlayer ) .." ID:".. id .."." )
                 setTimer( function()
-                    banPlayer( targetPlayer, true, true, true, getPlayerName( player ), reasonBan or "Unknown", timeBan )
+                    exports["va~main"]:send_punicoes( 'Mestre Timbu - Banido', "16750848", "Nome: **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."**\n Tempo: ".. timeBan .." Hora(s)\nAdministrador: **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."**\nMotivo: **" .. reasonBan or 'Indefinido' .."**", 'Desenvolvido por azarado bugs' )
+                    banPlayer( targetPlayer, true, true, true, getPlayerName( player ), 'Mais informações em nosso discord.', timeBan )
                 end, 3000, 1 )
-                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** baniu o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."** pelo motivo **".. reasonBan or "Undefined" .."**", 'Desenvolvido por azarado bugs' )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
             end
         else
-            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID] [Tempo] [Motivo]." )
+            return exports["va~notify"]:createNotifyS( player, "error", "Use: /".. commandName .." [ID] [Horas] [Motivo]." )
         end
     else
         return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
@@ -83,15 +74,16 @@ function gKick( player, commandName, id, ... )
     if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
         id = tonumber( id )
         if id then
-            local reasonKick = table.concat( { ... }, " " )
+            reasonKick = table.concat( { ... }, " " )
             local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if not reasonKick then reasonKick = 'Undifined' end
             if targetPlayer then
                 exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi kickado!" )
                 exports["va~notify"]:createNotifyS( player, "success", "Você kickou o jogador ".. getPlayerName( targetPlayer ) .." ID:".. id .."." )
                 setTimer( function()
+                    exports["va~main"]:send_punicoes( 'Mestre Timbu - Kickado', "16750848", "Nome: **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."**\nAdministrador: **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."**\nMotivo: **".. reasonKick or "Indefinido" .."**", 'Desenvolvido por azarado bugs' )
                     kickPlayer( targetPlayer, player, reasonKick or "Unknown" )
                 end, 3000, 1 )
-                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."** kickou o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "** pelo motivo **".. reasonKick or "Undefined" .."**", 'Desenvolvido por azarado bugs' )
             else
                 return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
             end
@@ -311,6 +303,55 @@ function setAdmin( player, commandName, id, adminlevel )
 end
 addCommandHandler( commandsAdmin.setadmin["commandName"], setAdmin )
 
+function jailPlayer( player, commandName, id, timer )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        time = tonumber( timer )
+        id = tonumber( id )
+        if id and time then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                setElementData( targetPlayer, 'va.timerJail', timer * 3600 )
+                setElementData( targetPlayer, "va.jail", true )
+                setPlayerTeam( targetPlayer, nil )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi preso pelo administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( player, "success", "Você prendeu o jogador ".. getPlayerName( targetPlayer ) .." por ".. timer .." Hora(s)." )
+                exports["va~main"]:send_punicoes( 'Mestre Timbu - Punido', "16750848", "Nome: **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ) .."**\n Tempo: ".. timer .." Hora(s)\nAdministrador: **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ) .."**", 'Desenvolvido por azarado bugs' )
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use /".. commandName .." [ID] [Horas]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.punirPlayer["commandName"], jailPlayer )
+
+function unjailPlayer( player, commandName, id )
+    if ( tonumber( getElementData( player, "va.adminlevel" ) ) >= 1 ) then
+        id = tonumber( id )
+        if id then
+            local targetPlayer = exports["va~main"]:getPlayerID( id )
+            if targetPlayer then
+                setElementData( targetPlayer, 'va.timerJail', 0 )
+                setElementData( targetPlayer, "va.jail", false )
+                triggerClientEvent( player, "va.justShow", player )
+                exports["va~notify"]:createNotifyS( targetPlayer, "info", "Você foi solto pelo administrador ".. getPlayerName( player ) .."." )
+                exports["va~notify"]:createNotifyS( player, "success", "Você soltou o jogador ".. getPlayerName( targetPlayer ) .."." )
+                exports["va~main"]:sendLogs( 'voidAcademy - Logs', "16750848", "O administrador **".. getPlayerName( player ) .." ID:".. getElementData( player, "va.playerID" ).. "** liberou o jogador **".. getPlayerName( targetPlayer ) .." ID:".. getElementData( targetPlayer, "va.playerID" ).. "**", 'Desenvolvido por azarado bugs' )
+            else
+                return exports["va~notify"]:createNotifyS( player, "error", "Jogador não encontrado!" )
+            end
+        else
+            return exports["va~notify"]:createNotifyS( player, "error", "Use /".. commandName .." [ID]." )
+        end
+    else
+        return exports["va~notify"]:createNotifyS( player, "error", "Você não pode usar /".. commandName .."." )
+    end
+end
+addCommandHandler( commandsAdmin.unpunirPlayer["commandName"], unjailPlayer )
+
 function givePlayerItem( player, commandName, id, itemID, amountItem )
     id = tonumber( id )
     itemID = tonumber( itemID )
@@ -369,7 +410,7 @@ function noClip( player, commandName )
                 function()
                     local cameraX, cameraY, cameraZ = getCameraMatrix( player )
                     setElementPosition( player, cameraX, cameraY, cameraZ )
-                end, 200, 0
+                end, 300, 0
             )
             toggleControl( player, "walk", false )
             setElementAlpha( player, 0 )

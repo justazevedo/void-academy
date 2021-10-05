@@ -39,7 +39,6 @@ addEvent( "va.loginPanel", true )
 addEventHandler( "va.loginPanel", root, loginPanel )
 
 function logIn( )
-    destroyElement( browser )
     setElementData( localPlayer, "va.loggedin", true )
     loginPanel( localPlayer, "hide" )
 end

@@ -11,6 +11,7 @@ end
 addEventHandler( "onResourceStart", resourceRoot, onStartup )
 
 function spawnPlayer( player, x, y, z, model, team )
+    setElementData( player, "va.inSelectedGroups", false )
     team = getTeamFromName( team )
     setPlayerTeam( player, team )
     exports["va~main"]:spawn( player, x, y, z, 0, model, 0, 0, team )

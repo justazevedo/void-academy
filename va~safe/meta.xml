@@ -1,6 +1,7 @@
 <meta>
     <info author="azevedo" name="SafeZone System (SS)" version="1.0.0"/>
 
+    <script src="resource.lua" type="server" cache="false"/>
     <script src="va_general.lua" type="shared" cache="false"/>
     <script src="va_server.lua" type="server" cache="false"/>
 

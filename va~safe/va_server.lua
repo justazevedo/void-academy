@@ -17,7 +17,6 @@ function enableProtectionPlayer( theElement, matchingDimension )
                 setElementData( theElement, "va.onSafeZone", true )
                 takeAllWeapons( theElement )
                 setElementData( theElement, "va.weaponInHand", { -1, -1, -1 } )
-			    setElementData( theElement, "va.weaponGettin" .. getElementData( theElement, "va.weaponIdData" ) .. getElementData( theElement, "va.weaponSlotData" ), false )
                 for _, commands in ipairs( commandsDisable ) do
                     toggleControl( theElement, commands, false )
                 end
@@ -46,4 +45,9 @@ addEventHandler( 'onColShapeLeave', root, disableProtectionPlayer )
 
 function notifyElement( player, type, message )
     exports["va~notify"]:createNotifyS( player, type, message )
+end
+
+if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
+    stopResource( getThisResource( ) )
+    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
 end
