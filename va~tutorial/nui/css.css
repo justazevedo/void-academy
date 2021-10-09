@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+}
+
+.main {
+    position: relative;
+    left: 35%;
+    padding: 1%;
+    margin-top: 10%;
+    width: 400px;
+    max-height: 400px;
+    border-radius: 8px;
+    border-top: #ff9100 20px solid;
+    background: rgba(0, 0, 0, 0.521);
+}
+
+.main::before {
+    content: 'Tutorial';
+    position: absolute;
+    top: -5%;
+    font-size: 0.9em;
+    left: 43%;
+    font-family: sans-serif;
+    color: white;
+}
+
+.main .text {
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.main .imagem {
+    position: relative;
+    margin-top: 5%;
+    width: 100%;
+    height: 200px;
+}
+
+.main .circle {
+    position: relative;
+    display: inline-block;
+    left: 38%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: -2%;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 100%;
+    transition: 0.3s;
+}
+
+.main .selected {
+    background-color: #ff9100;
+}
+
+.main .next {
+    position: relative;
+    display: block;
+    left: 25%;
+    margin-top: 1%;
+    width: 200px;
+    height: 20px;
+    outline: none;
+    border: #000 solid 1px;
+    border-radius: 8px;
+    background: #ff9100;
+    color: white;
+    transition: 0.3s;
+}
+
+.main .next:hover {
+    transform: scale(1.1);
+}

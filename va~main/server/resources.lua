@@ -1,7 +1,7 @@
 ﻿function startResources( )
     for resourceIndex, resourceName in ipairs( listResources ) do
         --135.148.31.105
-        if getServerIP() ~= "auto" then
+        if getServerIP() ~= "135.148.31.105" then
             local resource = getResourceFromName( "va~".. resourceName )
             stopResource( resource )
             return outputDebugString( 'INFO: Servidor Não Autorizado!' )

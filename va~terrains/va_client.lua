@@ -11,28 +11,34 @@ function startDominations()
     for i = 1, #terrains do
         if isElementWithinColShape( localPlayer, terrains[i].name_collisions ) then
             if not getElementData( terrains[i].name_collisions, "va.terrainsON" ) then
-                if getElementData( terrains[i].name_collisions, "va.ownerby" ) ~= getTeamName( getPlayerTeam( localPlayer ) ) then
-                    local playersOnTeam = getPlayersInTeam( getPlayerTeam( localPlayer ) )
-                    exports["va~notify"]:createNotify( playersOnTeam, "info", "Seu membro de equipe ".. getPlayerName( localPlayer ) .." começou a dominar o território de ".. getElementData( terrains[i].name_collisions, "va.terrains" ) ..", ajude-o.")
-                    exports["va~notify"]:createNotify( root, "warning", "A equipe ".. getTeamName( getPlayerTeam( localPlayer ) ) .." está dominando o território ".. getElementData( terrains[i].name_collisions, "va.terrains" ) .."." )
-                    setElementData( terrains[i].name_collisions, "va.terrainsON", true )
-                    setRadarAreaFlashing( terrains[i].name_areas, true )
-                    dominations_timer = setTimer( 
-                        function()
-                            if getElementData( terrains[i].name_collisions, "va.terrainsON" ) then
-                                exports["va~notify"]:createNotify( playersOnTeam, "success", "Seu membro de equipe ".. getPlayerName( localPlayer ) .." conseguiu dominar o território de ".. getElementData( terrains[i].name_collisions, "va.terrains" ) ..", e todos do time recebeu V$".. payments )
-                                local playerTeam = getPlayerTeam( localPlayer )
-                                setElementData( terrains[i].name_collisions, "va.terrainsON", false )
-                                setRadarAreaFlashing( terrains[i].name_areas, false )
-                                setElementData( terrains[i].name_collisions, "va.ownerby", getTeamName( playerTeam ) )
-                                local r, g, b = getTeamColor( playerTeam )
-                                setRadarAreaColor( terrains[i].name_areas, r, g, b )
-                                triggerServerEvent( 'va.giveMoneyTeam', localPlayer, getTeamName( playerTeam ), payments )
-                            end
-                        end, timer_to_dominations * 1000, 1
-                    )
+                if not getElementData( terrains[i].name_collisions, "va.cooldownTerrains" ) then
+                    if getElementData( terrains[i].name_collisions, "va.ownerby" ) ~= getTeamName( getPlayerTeam( localPlayer ) ) then
+                        local playersOnTeam = getPlayersInTeam( getPlayerTeam( localPlayer ) )
+                        exports["va~notify"]:createNotify( playersOnTeam, "info", "Seu membro de equipe ".. getPlayerName( localPlayer ) .." começou a dominar o território de ".. getElementData( terrains[i].name_collisions, "va.terrains" ) ..", ajude-o.")
+                        exports["va~notify"]:createNotify( root, "warning", "A equipe ".. getTeamName( getPlayerTeam( localPlayer ) ) .." está dominando o território ".. getElementData( terrains[i].name_collisions, "va.terrains" ) .."." )
+                        setElementData( terrains[i].name_collisions, "va.terrainsON", true )
+                        setRadarAreaFlashing( terrains[i].name_areas, true )
+                        dominations_timer = setTimer( 
+                            function()
+                                if getElementData( terrains[i].name_collisions, "va.terrainsON" ) then
+                                    setElementData( terrains[i].name_collisions, "va.cooldownTerrains", true )
+                                    exports["va~notify"]:createNotify( playersOnTeam, "success", "Seu membro de equipe ".. getPlayerName( localPlayer ) .." conseguiu dominar o território de ".. getElementData( terrains[i].name_collisions, "va.terrains" ) ..", e todos do time recebeu V$".. payments )
+                                    local playerTeam = getPlayerTeam( localPlayer )
+                                    setElementData( terrains[i].name_collisions, "va.terrainsON", false )
+                                    setRadarAreaFlashing( terrains[i].name_areas, false )
+                                    setElementData( terrains[i].name_collisions, "va.ownerby", getTeamName( playerTeam ) )
+                                    local r, g, b = getTeamColor( playerTeam )
+                                    setRadarAreaColor( terrains[i].name_areas, r, g, b )
+                                    triggerServerEvent( 'va.giveMoneyTeam', localPlayer, getTeamName( playerTeam ), payments )
+                                    setTimer( setElementData, cooldown_timer * 1000, 1, terrains[i].name_collisions, "va.cooldownTerrains", false )
+                                end
+                            end, timer_to_dominations * 1000, 1
+                        )
+                    else
+                        return exports["va~notify"]:createNotify( localPlayer, "error", "Esse território já está dominado pela sua equipe!" )
+                    end
                 else
-                    return exports["va~notify"]:createNotify( localPlayer, "error", "Esse território já está dominado pela sua equipe!" )
+                    return exports["va~notify"]:createNotify( localPlayer, "error", "Aguarde o território se recuperar!" )
                 end
             else
                 return exports["va~notify"]:createNotify( localPlayer, "error", "Alguém já está tentando dominar esse território!" )
@@ -41,6 +47,25 @@ function startDominations()
     end
 end
 addCommandHandler( 'dominar', startDominations )
+
+function hitDominations( theElement, matchingDimension )
+    if ( theElement == localPlayer ) then
+        for i = 1, #terrains do
+            local ownerby = getElementData( source, "va.ownerby" ) or 'Unknown'
+            local nameTerrains = getElementData( source, "va.terrains" )
+            if isElementWithinColShape( localPlayer, terrains[i].name_collisions ) then
+                exports["va~notify"]:createNotify( localPlayer, "info", "Você entrou em um território dos ".. ownerby .."." )
+                if ownerby ~= 'Unknown' then
+                    local playersOnTeam = getPlayersInTeam( getTeamFromName( ownerby ) )
+                    for _, playersTeam in ipairs( playersOnTeam ) do
+                        exports["va~notify"]:createNotify( playersTeam, "warning", "Um membro de uma equipe rival entrou em seu território em ".. nameTerrains .."." )
+                    end
+                end
+            end
+        end
+    end
+end
+addEventHandler( 'onClientColShapeHit', root, hitDominations )
 
 function cancelDominations( theElement, matchingDimension )
     if ( theElement == localPlayer ) then
@@ -51,9 +76,9 @@ function cancelDominations( theElement, matchingDimension )
                     killTimer( dominations_timer )
                 end
                 setElementData( source, "va.terrainsON", false )
-                setRadarAreaFlashing( terrains[i].name_areas, false )
                 exports["va~notify"]:createNotify( root, "warning", "A equipe ".. getTeamName( getPlayerTeam( localPlayer ) ) .." não conseguiu dominar o território ".. getElementData( terrains[i].name_collisions, "va.terrains" ) .."." )
                 exports["va~notify"]:createNotify( playersOnTeam, "warning", "Seu membro de equipe ".. getPlayerName( localPlayer ) .." não conseguiu dominar o território de ".. getElementData( terrains[i].name_collisions, "va.terrains" ) )
+                setRadarAreaFlashing( source, false )
                 if not getElementData( source, "va.ownerby" ) == 'Unknown' then
                     local r, g, b = getTeamColor( getTeamFromName( getElementData( source, "va.ownerby" ) ) )
                     setRadarAreaColor( terrains[i].name_areas, r, g, b )
