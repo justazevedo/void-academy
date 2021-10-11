@@ -5,15 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css.css">
+        <script src="jquery-1.11.3.min.js"></script>
         <script src="jquery.js"></script>
         <title>Tutorial System (TS)</title>
     </head>
     <body>
-        <div class="main">
-            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. arcu vel blandit ornare, mi lacus hendrerit urna, quis placerat erat nunc quis leo dsadhafhasufhasuifahifaifhaufhas<br>fhufhasfhashfuafjfasoijfioashasufasiufhiasfahufahfu<br>iahfiahfasfuasfasuifaufuiashfasuifash<br>fashiufuaisfhuasfhuasifiuhash.</div>
-            <img src="pedreiros.png" class="imagem">
-            <button class="next">Próximo</button>
-            <div id="1 circulo" circulo"" class="circle selected"></div><div id="2" class="circle"></div><div id="3" class="circle"></div><div id="4" class="circle"></div><div id="5" class="circle"></div>
+        <div id="main" class="main">
+            <div id="text" class="text"></div>
+            <img id="image" src="./imagens/dominacoes.png" class="imagem">
+            <button onclick="buttonClick()" id="next" class="next">Próximo</button>
+            <div onclick="clickCircle(1)" id="1" class="circle selected"></div><div onclick="clickCircle(2)" id="2" class="circle"></div><div onclick="clickCircle(3)" id="3" class="circle"></div><div onclick="clickCircle(4)" id="4" class="circle"></div><div onclick="clickCircle(5)" id="5" class="circle"></div>
         </div>
     </body>
 </html>

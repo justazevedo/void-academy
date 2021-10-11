@@ -31,7 +31,6 @@ function loginPanel( player, event )
             showChat( true )
             toggleAllControls( true )
             setElementFrozen( player, false )
-            triggerEvent( 'va.showGroups', player )
         end, 1500, 1 )
     end
 end
@@ -41,6 +40,13 @@ addEventHandler( "va.loginPanel", root, loginPanel )
 function logIn( )
     setElementData( localPlayer, "va.loggedin", true )
     loginPanel( localPlayer, "hide" )
+    if getElementData( localPlayer, "va.newPlayer" ) then
+        exports["va~tutorial"]:openTutorial()
+    else
+        setTimer( function()
+            exports["va~groups"]:showGroups()
+        end, 1500, 1 )
+    end
 end
 addEvent( "va.logIn", true )
 addEventHandler( "va.logIn", root, logIn )

@@ -12,6 +12,7 @@ body {
     width: 400px;
     max-height: 400px;
     border-radius: 8px;
+    transition: 0.6s;
     border-top: #ff9100 20px solid;
     background: rgba(0, 0, 0, 0.521);
 }
@@ -48,6 +49,7 @@ body {
     margin-bottom: -2%;
     width: 15px;
     height: 15px;
+    cursor: pointer;
     background: #fff;
     border-radius: 100%;
     transition: 0.3s;
@@ -74,4 +76,26 @@ body {
 
 .main .next:hover {
     transform: scale(1.1);
+}
+
+/*media_screen*/
+
+@media screen and (min-width: 1920px) {
+    .main {
+      left: 40%;
+      margin-top: 15%;
+    } 
+}
+
+@media screen and (min-width: 1366px) {
+    .main {
+      left: 35%;
+      margin-top: 10%;
+    } 
+}
+
+@media screen and (max-width: 800px) {
+    .main {
+      left: 25%;
+    } 
 }

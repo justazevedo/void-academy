@@ -1,0 +1,20 @@
+<meta>
+    <info author="justazevedo" name="Tutorial System (TS)" version="1.0.0"/>
+
+    <script src="resource.lua" type="server" cache="false"/>
+    <script src="va_client.lua" type="client" cache="false"/>
+    <script src="va_server.lua" type="server" cache="false"/>
+
+    <file src="nui/imagens/compras.png"/>
+    <file src="nui/imagens/configuracoes.png"/>
+    <file src="nui/imagens/dominacoes.png"/>
+    <file src="nui/imagens/energetico.png"/>
+    <file src="nui/imagens/radio.png"/>
+
+    <file src="nui/css.css"/>
+    <file src="nui/index.html"/>
+    <file src="nui/jquery-1.11.3.min.js"/>
+    <file src="nui/jquery.js"/>
+
+    <export function="openTutorial" type="client"/>
+</meta>

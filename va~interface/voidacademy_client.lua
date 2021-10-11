@@ -45,6 +45,7 @@ addEventHandler("onClientBrowserCreated", browser,
         for _, component in ipairs( components ) do
             setPlayerHudComponentVisible( component, false )
         end
+        setPedTargetingMarkerEnabled( false )
         if not isTimer( statsPlayer ) then
             statsPlayer = setTimer( playerStats, 100, 0 )
         end

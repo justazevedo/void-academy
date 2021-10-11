@@ -7,6 +7,7 @@ function playerLogin( thePreviousAccount, theCurrentAccount, autologin )
             local vaStaff = getAccountData( theCurrentAccount, "va.adminlevel" )
             local vaJail = getAccountData( theCurrentAccount, 'va.jail' )
             local vaTimer = getAccountData( theCurrentAccount, "va.timerJail" )
+            local vaTutorial = getAccountData( theCurrentAccount, "va.newPlayer" )
             setPlayerMoney( source, vaMoney )
             setElementModel( source, 0 )
             setPlayerWantedLevel( source, vaWanted )
@@ -14,6 +15,7 @@ function playerLogin( thePreviousAccount, theCurrentAccount, autologin )
             setElementData( source, "va.rangeVoice", "Falando" )
             setElementData( source, "va.jail", vaJail )
             setElementData( source, "va.timerJail", vaTimer )
+            setElementData( source, "va.newPlayer", vaTutorial )
         else
             setPlayerMoney( source, 2500 )
             setPlayerWantedLevel( source, 0 )
@@ -21,6 +23,7 @@ function playerLogin( thePreviousAccount, theCurrentAccount, autologin )
             setElementData( source, "va.adminlevel", 0 )
             setElementData( source, "va.jail", false )
             setElementData( source, "va.timerJail", 0 )
+            setElementData( source, "va.newPlayer", true )
         end
     else
         return
@@ -55,6 +58,7 @@ function playerSave( quitType, reason, responsibleElement )
             setAccountData( account, "va.adminlevel", getElementData( source, "va.adminlevel" ) )
             setAccountData( account, "va.jailTimer", getElementData( source, "va.timerJail" ) )
             setAccountData( account, "va.jail", getElementData( source, "va.jail" ) )
+            setAccountData( account, "va.newPlayer", getElementData( source, "va.newPlayer" ) )
         else
             return
         end

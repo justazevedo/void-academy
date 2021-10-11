@@ -33,9 +33,9 @@ function disableProtectionPlayer( leaveElement, matchingDimension )
     if getElementType( leaveElement ) == "player" then
         setElementData( leaveElement, "va.onSafeZone", false )
         notifyElement( leaveElement, "warning", "Você saiu de uma safezone!" )
-        --for _, commands in ipairs( commandsDisable ) do
-            --toggleControl( leaveElement, commands, true )
-        --end
+        for _, commands in ipairs( commandsDisable ) do
+            toggleControl( leaveElement, commands, true )
+        end
     else
         setVehicleDamageProof( leaveElement, false )
         setElementData( leaveElement, "va.onSafeZone", false )

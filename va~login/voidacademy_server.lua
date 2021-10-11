@@ -1,4 +1,4 @@
-if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
+﻿if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
     stopResource( getThisResource( ) )
     return outputDebugString( 'INFO: Servidor Não Autorizado!' )
 end
@@ -27,8 +27,7 @@ function panelFunctions( player, event, username, password )
                     logIn( player, account, password )
                     triggerClientEvent( player, "va.logIn", player )
                     if getElementData( player, "va.newPlayer" ) then
-                        exports["va~notify"]:createNotifyS( player, "success", "Olá ".. getPlayerName( player ) ..",<br>Seja bem vindo ao Void Academy Gang X Gang." )
-                        setElementData( player, "va.newPlayer", false )
+                        exports["va~notify"]:createNotifyS( player, "success", "Seja bem vindo ".. getPlayerName( player ) ..", para facilitar sua experiência veja esse mini-tutorial." )
                     else
                         exports["va~notify"]:createNotifyS( player, "success", "Bem vindo de volta ".. getPlayerName( player ) )
                     end
@@ -62,7 +61,7 @@ function panelFunctions( player, event, username, password )
                 return exports["va~notify"]:createNotifyS( player, "error", "Seu nome de usúario precisa conter mais que 4 caracteres!" )
             end
         else
-            return exports["va~notify"]:createNotifyS( player, "error", "Você já existe uma conta registrada nesse serial!" )
+            return exports["va~notify"]:createNotifyS( player, "error", "Já existe uma conta registrada nesse serial!" )
         end
     end
 end
