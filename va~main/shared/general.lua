@@ -6,6 +6,7 @@ listResources = {
     'main',
     'admin',
     'bone_attach',
+    'copy_discord',
     'freecam',
     'groups',
     'interface',
@@ -13,6 +14,7 @@ listResources = {
     'login',
     'notify',
     'radio',
+    'radar',
     'safe',
     'shop',
     'terrains',
@@ -21,6 +23,13 @@ listResources = {
     'weapons',
 }
 
-bindKeyStartFreeRadio = 'capslock'
-bindKeyStartChangeRange = 'x'
-bindKeyStartCloseRadio = 'r'
+bindsKey = {
+    { binds = 'capslock', commands = 'Liberar para falar no radio' },
+    { binds = 'x', commands = 'Mudar modo de falar' },
+    { binds = 'r', commands = 'Fechar o radio' },
+}
+
+models = {
+    ['energy_can'] = 2647,
+    ['radio_comunicador'] = 2663,
+}

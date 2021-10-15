@@ -27,7 +27,7 @@ end
 addEvent( 'va.toggleRadio', true )
 addEventHandler( 'va.toggleRadio', root, toggleRadio )
 
-addCommandHandler( 'Fechar o Radio',
+addCommandHandler( 'Fechar o radio',
 	function( )
 		if getElementData( localPlayer, "va.enabledRadio" ) then
 			guiSetVisible( browser, false )
@@ -95,14 +95,15 @@ function recieverFrequency( frequency )
 			setElementData( localPlayer, "va.inCall", true )
 			setElementData( localPlayer, "va.frequencyR", frequency )
 			connect = true
+			object_radio( connect )
 		else
 			executeBrowserJavascript( nui, "window.postMessage( { frequency : '' }, '*' )")
-			print('a')
 			triggerServerEvent( 'va.removeChannel', localPlayer, frequency )
 			playSound( ':va~voice/audio/offline.mp3' )
 			setElementData( localPlayer, "va.inCall", false )
 			setElementData( localPlayer, "va.frequencyR", 0 )
 			connect = false
+			object_radio( connect )
 		end
 	else
 		return exports["va~notify"]:createNotify( localPlayer, "info", "Coloque uma frequência correta." )
@@ -110,3 +111,17 @@ function recieverFrequency( frequency )
 end
 addEvent( "va.sendFrequency", true )
 addEventHandler( "va.sendFrequency", root, recieverFrequency )
+
+local radio_obj
+
+function object_radio( state )
+	if state then
+		local playerX, playerY, playerZ = getElementPosition( localPlayer )
+		radio_obj = createObject( 2663, playerX, playerY, playerZ )
+		exports["va~bone_attach"]:attachElementToBone( radio_obj, localPlayer, 5, -0.05, 0.05, 0.19, 10, 90, -315 )
+	else
+		if isElement( radio_obj ) then
+			destroyElement( radio_obj )
+		end
+	end
+end

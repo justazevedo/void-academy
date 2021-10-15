@@ -10,6 +10,16 @@ function onStartup( )
 end
 addEventHandler( "onResourceStart", resourceRoot, onStartup )
 
+_setPlayerTeam = setPlayerTeam 
+  
+addEvent( "onPlayerChangeTeam", true ) 
+function setPlayerTeam ( thePlayer, theTeam ) 
+    if not thePlayer or not theTeam then return false end 
+    local oldTeam = getPlayerTeam( thePlayer ) 
+    triggerEvent ( "va.blipRefresh", thePlayer, thePlayer, oldTeam, theTeam ) 
+    return _setPlayerTeam ( thePlayer, theTeam ) 
+end 
+
 function spawnPlayer( player, x, y, z, model, team )
     setElementData( player, "va.inSelectedGroups", false )
     team = getTeamFromName( team )

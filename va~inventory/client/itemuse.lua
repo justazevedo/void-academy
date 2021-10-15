@@ -21,10 +21,10 @@ end
 
 function drink_energy()
 	if not isTimer( energy_timer ) then
-		setGameSpeed( 1.1 )
+		setGameSpeed( 1.2 )
 		energy_timer = setTimer( energy_drink, 1000, 0 )
 	else
-		setGameSpeed( 1.1 )
+		setGameSpeed( 1.2 )
 	end
 end
 addEvent( "va.drink_energy", true )

@@ -4,7 +4,6 @@
     <script src="shared/general.lua" type="shared" cache="false"/>
     <script src="shared/player.lua" type="shared" cache="false"/>
 
-    <script src="client/binds.lua" type="client" cache="false"/>
     <script src="client/models.lua" type="client" cache="false"/>
     <script src="client/player.lua" type="client" cache="false"/>
 
@@ -19,6 +18,8 @@
 
     <file src="models/energy_can.dff"/>
     <file src="models/energy_can.txd"/>
+    <file src="models/radio_comunicador.dff"/>
+    <file src="models/radio_comunicador.txd"/>
 
     <export function="spawn" type="server"/>
     <export function="getServerIP" type="server"/>

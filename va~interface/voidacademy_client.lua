@@ -46,6 +46,7 @@ addEventHandler("onClientBrowserCreated", browser,
             setPlayerHudComponentVisible( component, false )
         end
         setPedTargetingMarkerEnabled( false )
+        setPlayerHudComponentVisible( "radar", true )
         if not isTimer( statsPlayer ) then
             statsPlayer = setTimer( playerStats, 100, 0 )
         end
@@ -92,12 +93,14 @@ function setInterface( value )
         end
         statsPlayer = setTimer( playerStats, 100, 0 )
         setElementData( localPlayer, "va.actionbar", true )
+        setPlayerHudComponentVisible( "radar", true )
         showChat( true )
     else
         hud = false
         if isTimer( statsPlayer ) then
             killTimer( statsPlayer )
         end
+        setPlayerHudComponentVisible( "radar", false )
         setElementData( localPlayer, "va.actionbar", false )
         showChat( false )
         executeBrowserJavascript( browser, "window.postMessage( { opacity : 0 }, '*' )" )

@@ -1,6 +1,8 @@
 for index, value in ipairs( terrains ) do
     terrains[index].name_collisions = createColRectangle( terrains[index].positions[1], terrains[index].positions[2], terrains[index].sizes[1], terrains[index].sizes[2] )
     terrains[index].name_areas = createRadarArea( terrains[index].positions[1], terrains[index].positions[2], terrains[index].sizes[1], terrains[index].sizes[2], 155, 155, 155, 255 )
+    local blips = createBlipAttachedTo( terrains[index].name_collisions, 23, 0.1, 255, 255, 255 )
+    setBlipVisibleDistance( blips, 150 )
     setElementData( terrains[index].name_collisions, "va.terrains", terrains[index].name )
     setElementData( terrains[index].name_collisions, "va.terrainsON", false )
     setElementData( terrains[index].name_areas, "va.areasname", terrains[index].name )

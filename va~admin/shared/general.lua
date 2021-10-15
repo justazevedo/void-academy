@@ -1,6 +1,7 @@
 commandsAdmin = {
     adminDuty = { commandName = 'adminduty', description = 'Entra de serviço staff [1]' },
     noclip = { commandName = 'nc', description = 'Entra no modo noClip. [1]' },
+    setblips = { commandName = 'blips', description = 'Mostrar o jogadores no mapa e informações em cima deles.' },
     sethealth = { commandName = 'setvida', description = 'Seta a vida do jogador.' },
     setarmor = { commandName = 'setcolete', description = 'Seta o colete do jogador.' },
     setadmin = { commandName = 'setadmin', description = 'Seta o nivel do admin.' },

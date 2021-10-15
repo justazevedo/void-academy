@@ -1,0 +1,5 @@
+<meta>
+    <info author="Cruzz and Azevedo" name="Discord Copy System" version="1.0.0"/>
+
+    <script src="va_client.lua" type="client" cache="false"/>
+</meta>
