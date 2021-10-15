@@ -571,8 +571,8 @@ function clickInventory(button, state, _, _, _, _, _, element)
 												end
 											end
 										elseif getElementType(element) == "player" and getElementType(inventoryElement) == "player" then
-											--[[exports["va~notify"]:createNotify( element, 'info', 'Aguarde um minuto.' )
-											packetTimer = setTimer(function() end, 1000, 1) --- spam védelem
+											exports["va~notify"]:createNotify( element, 'info', 'Aguarde um segundo.' )
+											packetTimer = setTimer(function() end, 500, 1)
 											if showInventory then
 												showInventory = false
 												removeEventHandler('onClientRender', root, drawInventory)
@@ -593,7 +593,7 @@ function clickInventory(button, state, _, _, _, _, _, element)
 												else
 													exports["va~notify"]:createNotify( element, 'error', 'Este jogador está usando o inventario.' )
 												end
-											end, 1000, 1, movedItem)]]
+											end, 500, 1, movedItem)
 										--[[elseif getElementType(element) =="object" and getElementModel(element) == 2332 and bodySearch and getElementData(element, "va.safeID") or 0 > 0 then 
 											if hasItem(localPlayer, 19, getElementData(element, "va.safeID")) then 
 												if movedItem[2] ~= 19 and movedValue ~= getElementData(element, "va.safeID") then
@@ -601,7 +601,7 @@ function clickInventory(button, state, _, _, _, _, _, element)
 												else
 													outputChatBox("#D24D57[BRP~Items] #ffffffVocê não pode colocar uma chave no cofre.", 255, 255, 255, true)
 												end
-											end	]]
+											end
 										elseif getElementType(inventoryElement) == "vehicle" and getElementType(element) == "player" and element == localPlayer then
 											--triggerServerEvent('va.movedItemToElement', inventoryElement, inventoryElement, element, movedItem[1], movedItem[2], movedItem[3], movedItem[4] )
 										elseif getElementType(inventoryElement) == "object" then
