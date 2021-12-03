@@ -9,7 +9,6 @@
     
     <script src="server/main.lua" type="server" cache="false"/>
     <script src="server/itemuse.lua" type="server" cache="false"/>
-    <script src="server/resource.lua" type="server" cache="false"/>
 	
 	<file src="img/bag.png" />
     <file src="img/craft.png" />

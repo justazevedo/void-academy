@@ -3,6 +3,5 @@
 
     <script src="va_general.lua" type="shared" cache="false"/>
     <script src="va_server.lua" type="server" cache="false"/>
-    <script src="resource.lua" type="server" cache="false"/>
 
 </meta>

@@ -1,11 +1,6 @@
 teamStaff = createTeam( "Staff", 155, 155, 155 )
 teamPunido = createTeam( "Punido(s)", 155, 155, 155 )
 
-if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/server/resource.lua' ) then
-    stopResource( getThisResource( ) )
-    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-end
-
 function adminDuty( player, commandName )
     local time = getRealTime()
 	local hours = time.hour

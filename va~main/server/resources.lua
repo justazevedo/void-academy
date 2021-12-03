@@ -1,17 +1,10 @@
 ﻿function startResources( )
     for resourceIndex, resourceName in ipairs( listResources ) do
-        --135.148.31.105
-        if getServerIP() ~= "135.148.31.105" then
+        setTimer( function( )
             local resource = getResourceFromName( "va~".. resourceName )
-            stopResource( resource )
-            return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-        else
-            setTimer( function( )
-                local resource = getResourceFromName( "va~".. resourceName )
-                outputDebugString( "starting resource NAME: ".. getResourceName( resource ) or "Unknown" .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) or "Unknown" ..", VERSION: ".. getResourceInfo( resource, "version" ) or "0.0.0" )
-                startResource( resource )
-            end, 5000, 1 )
-        end
+            outputDebugString( "starting resource NAME: ".. getResourceName( resource ) or "Unknown" .. ", AUTHOR: ".. getResourceInfo( resource, "author" ) or "Unknown" ..", VERSION: ".. getResourceInfo( resource, "version" ) or "0.0.0" )
+            startResource( resource )
+        end, 5000, 1 )
     end
 end
 addEventHandler( "onResourceStart", resourceRoot, startResources )

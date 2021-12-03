@@ -1,8 +1,3 @@
-if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
-    stopResource( getThisResource( ) )
-    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-end
-
 function buyItem( player, itemID, itemPrice, itemAmount )
     if itemPrice and itemPrice then
         local playerMoney = getPlayerMoney( player )

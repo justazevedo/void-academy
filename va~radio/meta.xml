@@ -3,7 +3,6 @@
 
     <script src="va_client.lua" type="client" cache="false"/>
     <script src="va_server.lua" type="server" cache="false"/>
-    <script src="resource.lua" type="server" cache="false"/>
 
     <file src="nui/images/clock.ttf"/>
     <file src="nui/images/radio.png"/>

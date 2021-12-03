@@ -1,8 +1,3 @@
-if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
-    stopResource( getThisResource( ) )
-    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-end
-
 function setChannel( channel )
     print( 'Radio System - The player '.. getPlayerName( source ) ..' has enter in frequency '.. channel .. 'MHz' )
     exports["va~voice"]:setPlayerChannel( source, channel )

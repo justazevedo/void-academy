@@ -1,9 +1,7 @@
 <meta>
     <info author="justazevedo" name="Tutorial System (TS)" version="1.0.0"/>
 
-    <script src="resource.lua" type="server" cache="false"/>
     <script src="va_client.lua" type="client" cache="false"/>
-    <script src="va_server.lua" type="server" cache="false"/>
 
     <file src="nui/imagens/compras.png"/>
     <file src="nui/imagens/configuracoes.png"/>

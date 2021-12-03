@@ -1,9 +1,4 @@
-﻿if not fileExists( ':'.. getResourceName( getThisResource( ) ) ..'/resource.lua' ) then
-    stopResource( getThisResource( ) )
-    return outputDebugString( 'INFO: Servidor Não Autorizado!' )
-end
-
-function playerJoin()
+﻿function playerJoin()
     setElementData( source, "va.loggedin", false )
     setElementData( source, "va.rangeVoice", 'Falando' )
     fadeCamera( source, true, 5 )

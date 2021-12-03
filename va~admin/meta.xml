@@ -8,7 +8,6 @@
 
     <script src="server/player.lua" type="server" cache="false"/>
     <script src="server/vehicle.lua" type="server" cache="false"/>
-    <script src="server/resource.lua" type="server" cache="false"/>
 
     <file src="html/index.html"/>
     <file src="html/jquery-1.11.3.min.js"/>
